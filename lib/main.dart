@@ -111,18 +111,21 @@ class MainMenu extends StatelessWidget {
         return InkWell(
           onTap: () {},
           child: Card(
+              child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(
-                    flex: 1,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        'images/1.jpg',
-                        height: 200,
-                      ),
-                    )),
+                  flex: 2,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      'images/1.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
                 Expanded(
                     flex: 3,
                     child: Padding(
@@ -134,24 +137,25 @@ class MainMenu extends StatelessWidget {
                             Text(
                               'Judul Buku',
                               style: TextStyle(
-                                  fontSize: 26, fontWeight: FontWeight.bold),
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
                               'Author',
-                              style: TextStyle(fontStyle: FontStyle.italic),
+                              style: TextStyle(
+                                  fontStyle: FontStyle.italic, fontSize: 12),
                             ),
                             SizedBox(
                               height: 5,
                             ),
-                            Text('Rating'),
+                            //Text('Rating'),
                             SizedBox(
                               height: 5,
                             ),
-                            Text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+                            //Text(
+                            //    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
                           ],
                         ))),
                 Expanded(
@@ -160,7 +164,7 @@ class MainMenu extends StatelessWidget {
                 )
               ],
             ),
-          ),
+          )),
         );
       },
     );
@@ -184,7 +188,7 @@ class _BookmarkedState extends State<Bookmarked> {
       },
       icon: Icon(
         isMarked ? Icons.bookmark : Icons.bookmark_outline,
-        size: 50,
+        size: 30,
       ),
     );
   }
