@@ -34,10 +34,11 @@ class MainState extends State<Main> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Image.asset(
+                'images/cat3.png',
+                fit: BoxFit.fill,
               ),
-              child: Text('This is drawer header'),
             ),
             ListTile(
               title: Text('item 1'),
