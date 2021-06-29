@@ -1,3 +1,4 @@
+import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
@@ -16,7 +17,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Main extends StatelessWidget {
+class Main extends StatefulWidget {
+  @override
+  MainState createState() => MainState();
+}
+
+class MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,6 +114,7 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
+        final Book book = booksList[index];
         return InkWell(
           onTap: () {},
           child: Card(
@@ -120,8 +127,8 @@ class MainMenu extends StatelessWidget {
                   flex: 2,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      'images/1.png',
+                    child: Image.network(
+                      book.bookThumbnail,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -135,7 +142,7 @@ class MainMenu extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'Judul Buku',
+                              book.title,
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
@@ -143,7 +150,7 @@ class MainMenu extends StatelessWidget {
                               height: 5,
                             ),
                             Text(
-                              'Author',
+                              book.author,
                               style: TextStyle(
                                   fontStyle: FontStyle.italic, fontSize: 12),
                             ),
@@ -167,6 +174,7 @@ class MainMenu extends StatelessWidget {
           )),
         );
       },
+      itemCount: booksList.length,
     );
   }
 }
