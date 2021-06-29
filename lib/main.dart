@@ -109,7 +109,12 @@ class MainState extends State<Main> {
   }
 }
 
-class MainMenu extends StatelessWidget {
+class MainMenu extends StatefulWidget {
+  @override
+  MainMenuState createState() => MainMenuState();
+}
+
+class MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
