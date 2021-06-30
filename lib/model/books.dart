@@ -38,8 +38,7 @@ var booksList = [
       description:
           'Published in 1916, James Joyce’s semiautobiographical tale of his alter ego, Stephen Dedalus, is a coming-of-age story like no other. A bold, innovative experiment with both language and structure, the work has exerted a lasting influence on the contemporary novel; Alfred Kazin commented that “Joyce dissolved mechanism in literature as effectively as Einstein destroyed it in physics.” Reviewing the book in The New Republic, H. G. Wells wrote, “Like some of the best novels in the world it is the story of an education; it is by far the most living and convincing picture that exists of an Irish Catholic upbringing.”',
       bookThumbnail: 'http://ecx.images-amazon.com/images/I/51DY8lRXVjL.jpg',
-      bookCover:
-          'https://more2read.com/wp-content/uploads/APortraitoftheArtistasaYoungManbyJamesJoyce.jpg'),
+      bookCover: 'http://ecx.images-amazon.com/images/I/51DY8lRXVjL.jpg'),
   Book(
       title: 'LOLITA',
       author: 'Vladimir Nabokov',
