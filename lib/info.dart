@@ -42,11 +42,45 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.network(
-                  book.bookCover,
-                  height: 300,
-                  width: 500,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(10, 5, 15, 15),
+                      child: Container(
+                          width: 280,
+                          child: Image.network(
+                            book.bookCover,
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Center(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            child: Text(
+                              book.title,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 26),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                child: Text(book.author),
+                              )
+                            ],
+                          )
+                        ],
+                      )),
+                    )
+                  ],
                 ),
               ],
             ),
