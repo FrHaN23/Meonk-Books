@@ -56,7 +56,7 @@ var booksList = [
       bookThumbnail:
           'https://mir-s3-cdn-cf.behance.net/project_modules/1400/bfffaf13630039.562761884989f.jpg',
       bookCover:
-          'https://media.npr.org/assets/bakertaylor/covers/b/brave-new-world/9780060850524_custom-s6-c30.jpg?t=1312817464'),
+          'https://mir-s3-cdn-cf.behance.net/project_modules/1400/bfffaf13630039.562761884989f.jpg'),
   Book(
       title: 'THE SOUND AND THE FURY',
       author: 'William Faulkner',

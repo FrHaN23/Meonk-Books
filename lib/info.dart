@@ -36,6 +36,7 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,37 +57,58 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                             fit: BoxFit.cover,
                           )),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 15),
-                      child: Center(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            child: Text(
-                              book.title,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 26),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Center(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 16),
+                              child: Text(
+                                book.title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                              ),
                             ),
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                child: Text(book.author),
-                              )
-                            ],
-                          )
-                        ],
-                      )),
-                    )
+                            Row(
+                              children: [
+                                Container(
+                                  child: Text(
+                                    book.author,
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        )),
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
             Row(
-              children: [Text(book.description)],
-            )
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(10, 0, 20, 10),
+                      child: Text(
+                        book.description,
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ])
           ],
         ),
       ),
