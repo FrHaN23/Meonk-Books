@@ -49,9 +49,9 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(10, 5, 15, 15),
+                      padding: EdgeInsets.fromLTRB(10, 10, 15, 10),
                       child: Container(
-                          width: 280,
+                          width: 260,
                           child: Image.network(
                             book.bookCover,
                             fit: BoxFit.cover,
@@ -71,7 +71,7 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                                 book.title,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 22,
+                                  fontSize: 19,
                                 ),
                               ),
                             ),
@@ -80,8 +80,9 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                                 Container(
                                   child: Text(
                                     book.author,
-                                    style:
-                                        TextStyle(fontStyle: FontStyle.italic),
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 16),
                                   ),
                                 ),
                               ],
@@ -100,7 +101,7 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                 children: [
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(10, 0, 20, 10),
+                      padding: EdgeInsets.fromLTRB(25, 0, 50, 10),
                       child: Text(
                         book.description,
                         textAlign: TextAlign.justify,

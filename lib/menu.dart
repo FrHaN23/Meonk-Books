@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/info.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MainMenu extends StatefulWidget {
   @override
@@ -36,7 +37,7 @@ class MainMenuState extends State<MainMenu> {
                   ),
                 ),
                 Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: Padding(
                         padding: EdgeInsets.all(16),
                         child: Column(
@@ -46,7 +47,7 @@ class MainMenuState extends State<MainMenu> {
                             Text(
                               book.title,
                               style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5,
@@ -54,12 +55,52 @@ class MainMenuState extends State<MainMenu> {
                             Text(
                               book.author,
                               style: TextStyle(
-                                  fontStyle: FontStyle.italic, fontSize: 12),
+                                  fontStyle: FontStyle.italic, fontSize: 18),
                             ),
                             SizedBox(
-                              height: 5,
+                              height: 10,
                             ),
-                            //Text('Rating'),
+                            Row(
+                              children: [
+                                RatingBar(
+                                  initialRating: book.rating,
+                                  updateOnDrag: false,
+                                  tapOnlyMode: false,
+                                  itemSize: 20,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  ratingWidget: RatingWidget(
+                                      full: Icon(Icons.star,
+                                          color: Colors.orange),
+                                      half: Icon(
+                                        Icons.star_half,
+                                        color: Colors.orange,
+                                      ),
+                                      empty: Icon(
+                                        Icons.star_outline,
+                                        color: Colors.orange,
+                                      )),
+                                  onRatingUpdate: (value) {},
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  book.rating.toString(),
+                                  style: TextStyle(fontSize: 16),
+                                )
+                              ],
+                            ),
+
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              book.description,
+                              maxLines: 7,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                             SizedBox(
                               height: 5,
                             ),
