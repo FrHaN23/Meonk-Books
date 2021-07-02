@@ -62,26 +62,28 @@ class MainMenuState extends State<MainMenu> {
                             ),
                             Row(
                               children: [
-                                RatingBar(
-                                  initialRating: book.rating,
-                                  updateOnDrag: false,
-                                  tapOnlyMode: false,
-                                  itemSize: 20,
-                                  direction: Axis.horizontal,
-                                  allowHalfRating: true,
-                                  itemCount: 5,
-                                  ratingWidget: RatingWidget(
-                                      full: Icon(Icons.star,
-                                          color: Colors.orange),
-                                      half: Icon(
-                                        Icons.star_half,
-                                        color: Colors.orange,
-                                      ),
-                                      empty: Icon(
-                                        Icons.star_outline,
-                                        color: Colors.orange,
-                                      )),
-                                  onRatingUpdate: (value) {},
+                                AbsorbPointer(
+                                  child: RatingBar(
+                                    initialRating: book.rating,
+                                    updateOnDrag: false,
+                                    tapOnlyMode: false,
+                                    itemSize: 20,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    ratingWidget: RatingWidget(
+                                        full: Icon(Icons.star,
+                                            color: Colors.orange),
+                                        half: Icon(
+                                          Icons.star_half,
+                                          color: Colors.orange,
+                                        ),
+                                        empty: Icon(
+                                          Icons.star_outline,
+                                          color: Colors.orange,
+                                        )),
+                                    onRatingUpdate: (value) {},
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 10,

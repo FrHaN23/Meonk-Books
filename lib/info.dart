@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +35,71 @@ class InfoScreenMobile extends StatefulWidget {
 class InfoScreenMobileState extends State<InfoScreenMobile> {
   final Book book;
   InfoScreenMobileState({required this.book});
+  @override
+  Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Stack(
+                  children: [
+                    Expanded(
+                      child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(book.bookCover),
+                                  fit: BoxFit.fill)),
+                          width: _width,
+                          height: 400,
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0)),
+                            ),
+                          )),
+                    ),
+                    Expanded(
+                        child: Container(
+                            width: _width,
+                            height: 350,
+                            child: Container(
+                              padding: EdgeInsets.only(top: 55),
+                              child: Center(
+                                  child: Image.network(
+                                book.bookCover,
+                              )),
+                            ))),
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+//Web Version//
+class InfoScreenWeb extends StatefulWidget {
+  final Book book;
+  InfoScreenWeb({required this.book});
+  @override
+  InfoScreenWebState createState() => InfoScreenWebState(book: book);
+}
+
+//web Version//
+class InfoScreenWebState extends State<InfoScreenWeb> {
+  final Book book;
+  InfoScreenWebState({required this.book});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
