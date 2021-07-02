@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
 
@@ -39,10 +39,11 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,18 +68,158 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                           )),
                     ),
                     Expanded(
+                      child: Container(
+                        width: _width,
+                        height: 350,
                         child: Container(
-                            width: _width,
-                            height: 350,
-                            child: Container(
-                              padding: EdgeInsets.only(top: 55),
-                              child: Center(
-                                  child: Image.network(
-                                book.bookCover,
-                              )),
-                            ))),
+                          padding: EdgeInsets.only(top: 55),
+                          child: Center(
+                              child: Image.network(
+                            book.bookCover,
+                          )),
+                        ),
+                      ),
+                    ),
                   ],
-                )
+                ),
+                Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.white),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: 15,
+                        ),
+                        child: Center(
+                          child: Text(
+                            book.title,
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.white),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 5),
+                        child: Center(
+                          child: Text(
+                            "By " + book.author,
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.white),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.only(
+                              top: 5,
+                            ),
+                            child: AbsorbPointer(
+                              child: RatingBar(
+                                initialRating: book.rating,
+                                updateOnDrag: false,
+                                tapOnlyMode: false,
+                                itemSize: 19,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                ratingWidget: RatingWidget(
+                                    full:
+                                        Icon(Icons.star, color: Colors.orange),
+                                    half: Icon(
+                                      Icons.star_half,
+                                      color: Colors.orange,
+                                    ),
+                                    empty: Icon(
+                                      Icons.star_outline,
+                                      color: Colors.orange,
+                                    )),
+                                onRatingUpdate: (value) {},
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 5, left: 5),
+                          child: Text(
+                            book.rating.toString(),
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        //border: Border(bottom: BorderSide(color: Colors.black)),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 5, top: 5),
+                        child: Center(
+                          child: Text(
+                            "Description",
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.white),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(15, 5, 30, 30),
+                        child: Center(
+                          child: Text(
+                            book.description,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ],
