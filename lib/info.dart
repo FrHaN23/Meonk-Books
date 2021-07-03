@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
+import 'package:buku_meonk/global.dart' as global;
 
 class InfoScreen extends StatefulWidget {
   final Book book;
@@ -34,12 +35,13 @@ class InfoScreenMobile extends StatefulWidget {
 
 class InfoScreenMobileState extends State<InfoScreenMobile> {
   final Book book;
+  final blacked = Colors.black54;
   InfoScreenMobileState({required this.book});
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: global.isDarkModeEnabled ? blacked : Colors.white,
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
@@ -85,10 +87,6 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                 Column(
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.white),
-                      ),
                       child: Padding(
                         padding: EdgeInsets.only(
                           top: 15,
@@ -107,10 +105,6 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                 Column(
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.white),
-                      ),
                       child: Padding(
                         padding: EdgeInsets.only(top: 5),
                         child: Center(
@@ -131,10 +125,6 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white),
-                          ),
                           child: Container(
                             padding: EdgeInsets.only(
                               top: 5,
@@ -180,10 +170,6 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                 Column(
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        //border: Border(bottom: BorderSide(color: Colors.black)),
-                      ),
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 5, top: 5),
                         child: Center(
@@ -201,10 +187,6 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                 Column(
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.white),
-                      ),
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(15, 5, 30, 30),
                         child: Center(

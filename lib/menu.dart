@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/info.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MainMenu extends StatefulWidget {
@@ -12,6 +13,7 @@ class MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: true,
       itemBuilder: (context, index) {
         final Book book = booksList[index];
         return InkWell(
