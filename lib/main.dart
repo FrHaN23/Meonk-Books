@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Meonk Books',
-      theme: ThemeData(
-          brightness:
-              global.isDarkModeEnabled ? Brightness.dark : Brightness.light),
+      theme: ThemeData(),
       home: Main(),
     );
   }
@@ -27,14 +25,24 @@ class Main extends StatefulWidget {
 }
 
 class MainState extends State<Main> {
-  var isDarkModeEnabled = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Buku Meonk'),
+        title: Text(
+          'Buku Meonk',
+          style: TextStyle(
+              color: global.isDarkModeEnabled ? Colors.white : Colors.black),
+        ),
+        backgroundColor:
+            global.isDarkModeEnabled ? Colors.black87 : Colors.amber[300],
+        foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
+        iconTheme: IconThemeData(
+            color: global.isDarkModeEnabled ? Colors.white : Colors.black),
       ),
       drawer: Drawer(
+          child: Container(
+        color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[100],
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -49,50 +57,61 @@ class MainState extends State<Main> {
               height: 10,
             ),
             ListTile(
-              leading: Icon(Icons.nightlife),
-              title: Text('item 1'),
+              leading: Icon(
+                Icons.menu_book,
+                color: global.isDarkModeEnabled ? Colors.white : null,
+              ),
+              title: Text(
+                'Beranda',
+                style: TextStyle(
+                    color: global.isDarkModeEnabled ? Colors.white : null),
+              ),
               onTap: () {
                 //where should it go
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.switch_left),
-              title: Text('item 2'),
+              leading: Icon(
+                Icons.favorite_outline_rounded,
+                color: global.isDarkModeEnabled ? Colors.white : null,
+              ),
+              title: Text(
+                'Favorite',
+                style: TextStyle(
+                    color: global.isDarkModeEnabled ? Colors.white : null),
+              ),
               onTap: () {
                 //where should it go
                 Navigator.pop(context);
               },
             ),
-            ListTile(
-              title: Text('item 2'),
-              onTap: () {
-                //where should it go
-                Navigator.pop(context);
-              },
-            )
           ],
         ),
-      ),
+      )),
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
         icon: Icons.keyboard_control,
         activeIcon: Icons.remove,
         overlayColor: Colors.white,
         backgroundColor:
-            global.isDarkModeEnabled ? Colors.blueGrey : Colors.blue,
-        foregroundColor: Colors.white,
+            global.isDarkModeEnabled ? Colors.black : Colors.amber[500],
+        foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
         renderOverlay: false,
-        overlayOpacity: 0.5,
+        overlayOpacity: 0.3,
         visible: true,
         closeManually: false,
         children: [
           SpeedDialChild(
             child: Icon(
-                global.isDarkModeEnabled ? Icons.light_mode : Icons.dark_mode),
-            backgroundColor: Colors.blue,
+              global.isDarkModeEnabled ? Icons.light_mode : Icons.dark_mode,
+              color: global.isDarkModeEnabled ? Colors.white : null,
+            ),
+            backgroundColor: global.isDarkModeEnabled ? Colors.black54 : null,
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () {},
+            onTap: () => setState(() {
+              global.isDarkModeEnabled = !global.isDarkModeEnabled;
+            }),
             onLongPress: () => print('FIRST CHILD LONG PRESS'),
           ),
           SpeedDialChild(

@@ -35,14 +35,19 @@ class InfoScreenMobile extends StatefulWidget {
 
 class InfoScreenMobileState extends State<InfoScreenMobile> {
   final Book book;
-  final blacked = Colors.black54;
   InfoScreenMobileState({required this.book});
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: global.isDarkModeEnabled ? blacked : Colors.white,
-      appBar: AppBar(),
+      backgroundColor:
+          global.isDarkModeEnabled ? Colors.black54 : Colors.amber[100],
+      appBar: AppBar(
+        backgroundColor:
+            global.isDarkModeEnabled ? Colors.black12 : Colors.amber[300],
+        foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,9 +61,10 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                     Expanded(
                       child: Container(
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(book.bookCover),
-                                  fit: BoxFit.fill)),
+                            image: DecorationImage(
+                                image: NetworkImage(book.bookCover),
+                                fit: BoxFit.fill),
+                          ),
                           width: _width,
                           height: 400,
                           child: BackdropFilter(
@@ -95,7 +101,12 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                           child: Text(
                             book.title,
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: global.isDarkModeEnabled
+                                  ? Colors.white
+                                  : null,
+                            ),
                           ),
                         ),
                       ),
@@ -112,6 +123,9 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                             "By " + book.author,
                             style: TextStyle(
                               fontSize: 14,
+                              color: global.isDarkModeEnabled
+                                  ? Colors.white
+                                  : null,
                             ),
                           ),
                         ),
@@ -160,6 +174,9 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                             book.rating.toString(),
                             style: TextStyle(
                               fontSize: 16,
+                              color: global.isDarkModeEnabled
+                                  ? Colors.white
+                                  : null,
                             ),
                           ),
                         )
@@ -177,6 +194,9 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                             "Description",
                             style: TextStyle(
                               fontSize: 18,
+                              color: global.isDarkModeEnabled
+                                  ? Colors.white
+                                  : null,
                             ),
                           ),
                         ),
@@ -195,6 +215,9 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                             textAlign: TextAlign.justify,
                             style: TextStyle(
                               fontSize: 16,
+                              color: global.isDarkModeEnabled
+                                  ? Colors.white
+                                  : null,
                             ),
                           ),
                         ),
