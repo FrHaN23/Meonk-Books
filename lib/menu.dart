@@ -28,7 +28,6 @@ class MainMenuState extends State<MainMenu> {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             final Book book = booksList[index];
-
             return InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -166,6 +165,7 @@ class Bookmarked extends StatefulWidget {
   _BookmarkedState createState() => _BookmarkedState();
 }
 
+//this class broken need fixing
 class _BookmarkedState extends State<Bookmarked> {
   final isMarked = favoriteBookList.contains(Book);
   @override
