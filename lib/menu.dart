@@ -13,12 +13,22 @@ class MainMenu extends StatefulWidget {
 class MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
+    bool _isWidthMoreThan600 = false;
+    bool _isWidthMoreThan660 = false;
+    if (_width > 660) {
+      _isWidthMoreThan660 = true;
+    } else if (_width > 600) {
+      _isWidthMoreThan600 = true;
+      _isWidthMoreThan660 = false;
+    }
     return Container(
         color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
         child: ListView.builder(
           shrinkWrap: true,
           itemBuilder: (context, index) {
             final Book book = booksList[index];
+
             return InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -117,7 +127,11 @@ class MainMenuState extends State<MainMenu> {
                                   ),
                                   Text(
                                     book.description,
-                                    maxLines: 8,
+                                    maxLines: _isWidthMoreThan600
+                                        ? 12
+                                        : _isWidthMoreThan660
+                                            ? 15
+                                            : 8,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       color: global.isDarkModeEnabled
@@ -153,20 +167,24 @@ class Bookmarked extends StatefulWidget {
 }
 
 class _BookmarkedState extends State<Bookmarked> {
-  bool isMarked = false;
+  final isMarked = favoriteBookList.contains(Book);
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      color: global.isDarkModeEnabled ? Colors.white : null,
-      onPressed: () {
-        setState(() {
-          isMarked = !isMarked;
-        });
-      },
       icon: Icon(
         isMarked ? Icons.bookmark : Icons.bookmark_outline,
         size: 30,
       ),
+      color: global.isDarkModeEnabled ? Colors.white : null,
+      onPressed: () {
+        setState(() {
+          if (isMarked) {
+            favoriteBookList.add(Book);
+          } else {
+            favoriteBookList.remove(Book);
+          }
+        });
+      },
     );
   }
 }

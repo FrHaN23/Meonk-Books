@@ -46,7 +46,9 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
         backgroundColor:
             global.isDarkModeEnabled ? Colors.black12 : Colors.amber[300],
         foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(
+          color: global.isDarkModeEnabled ? Colors.white : Colors.black,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

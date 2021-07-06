@@ -85,3 +85,5 @@ var booksList = [
       bookCover:
           'https://cdn2.penguin.com.au/covers/original/9780099529125.jpg'),
 ];
+
+var favoriteBook = [];

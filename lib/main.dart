@@ -1,7 +1,9 @@
+import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:buku_meonk/menu.dart';
+import 'package:buku_meonk/favorite.dart';
 import 'package:buku_meonk/global.dart' as global;
 
 void main() {
@@ -67,7 +69,14 @@ class MainState extends State<Main> {
                     color: global.isDarkModeEnabled ? Colors.white : null),
               ),
               onTap: () {
-                //where should it go
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      print("ini jalan");
+                      return MainMenu();
+                    },
+                  ),
+                );
                 Navigator.pop(context);
               },
             ),
@@ -82,7 +91,14 @@ class MainState extends State<Main> {
                     color: global.isDarkModeEnabled ? Colors.white : null),
               ),
               onTap: () {
-                //where should it go
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return FavoriteScreen();
+                    },
+                  ),
+                );
                 Navigator.pop(context);
               },
             ),
