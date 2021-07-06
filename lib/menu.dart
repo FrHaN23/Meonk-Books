@@ -28,7 +28,7 @@ class MainMenuState extends State<MainMenu> {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             final Book book = booksList[index];
-            Set<List> favoriteBook = Set<List>();
+            Set<Book> favoriteBook = Set<Book>();
             bool isMarked = favoriteBook.contains(book);
             print(book);
             return InkWell(
@@ -154,10 +154,11 @@ class MainMenuState extends State<MainMenu> {
                           onPressed: () {
                             setState(() {
                               if (isMarked) {
-                                favoriteBookList.remove(book);
+                                favoriteBook.remove(book);
                                 print("ini jalan");
                               } else {
-                                favoriteBookList.add(book);
+                                favoriteBook.add(book);
+                                isMarked = !isMarked;
                                 print("else");
                               }
                             });
