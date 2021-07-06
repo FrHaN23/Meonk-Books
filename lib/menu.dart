@@ -129,9 +129,9 @@ class MainMenuState extends State<MainMenu> {
                                   ),
                                   Text(
                                     book.description,
-                                    maxLines: _isWidthMoreThan600
+                                    maxLines: _isWidthMoreThan660
                                         ? 12
-                                        : _isWidthMoreThan660
+                                        : _isWidthMoreThan600
                                             ? 15
                                             : 8,
                                     overflow: TextOverflow.ellipsis,
@@ -164,7 +164,11 @@ class MainMenuState extends State<MainMenu> {
                           },
                           icon: Icon(
                             isMarked ? Icons.bookmark : Icons.bookmark_outline,
-                            size: 30,
+                            size: _isWidthMoreThan660
+                                ? 35
+                                : _isWidthMoreThan600
+                                    ? 40
+                                    : 30,
                           ),
                           color: global.isDarkModeEnabled ? Colors.white : null,
                         ),
