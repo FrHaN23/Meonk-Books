@@ -1,4 +1,3 @@
-import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -69,15 +68,12 @@ class MainState extends State<Main> {
                     color: global.isDarkModeEnabled ? Colors.white : null),
               ),
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      print("ini jalan");
-                      return MainMenu();
-                    },
-                  ),
-                );
                 Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Main();
+                  },
+                ));
               },
             ),
             ListTile(
@@ -91,15 +87,12 @@ class MainState extends State<Main> {
                     color: global.isDarkModeEnabled ? Colors.white : null),
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return FavoriteScreen();
-                    },
-                  ),
-                );
                 Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return FavoriteScreen();
+                  },
+                ));
               },
             ),
           ],
