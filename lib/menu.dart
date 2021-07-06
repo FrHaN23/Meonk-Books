@@ -28,6 +28,9 @@ class MainMenuState extends State<MainMenu> {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             final Book book = booksList[index];
+            Set<List> favoriteBook = Set<List>();
+            bool isMarked = favoriteBook.contains(book);
+            print(book);
             return InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -147,8 +150,25 @@ class MainMenuState extends State<MainMenu> {
                               ))),
                       Expanded(
                         flex: 1,
-                        child: Bookmarked(),
-                      )
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if (isMarked) {
+                                favoriteBookList.remove(book);
+                                print("ini jalan");
+                              } else {
+                                favoriteBookList.add(book);
+                                print("else");
+                              }
+                            });
+                          },
+                          icon: Icon(
+                            isMarked ? Icons.bookmark : Icons.bookmark_outline,
+                            size: 30,
+                          ),
+                          color: global.isDarkModeEnabled ? Colors.white : null,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -157,34 +177,5 @@ class MainMenuState extends State<MainMenu> {
           },
           itemCount: booksList.length,
         ));
-  }
-}
-
-class Bookmarked extends StatefulWidget {
-  @override
-  _BookmarkedState createState() => _BookmarkedState();
-}
-
-//this class broken need fixing
-class _BookmarkedState extends State<Bookmarked> {
-  final isMarked = favoriteBookList.contains(Book);
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(
-        isMarked ? Icons.bookmark : Icons.bookmark_outline,
-        size: 30,
-      ),
-      color: global.isDarkModeEnabled ? Colors.white : null,
-      onPressed: () {
-        setState(() {
-          if (isMarked) {
-            favoriteBookList.add(Book);
-          } else {
-            favoriteBookList.remove(Book);
-          }
-        });
-      },
-    );
   }
 }
