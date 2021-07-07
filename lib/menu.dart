@@ -189,7 +189,6 @@ class MainMenuState extends State<MainMenu> {
                                   print("ini jalan");
                                 } else {
                                   favoriteBookList.add(book);
-                                  print("else");
                                   print(favoriteBookList);
                                 }
                               });
