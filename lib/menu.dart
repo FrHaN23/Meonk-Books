@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/info.dart';
 import 'package:flutter/rendering.dart';
+
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buku_meonk/global.dart' as global;
 
@@ -11,28 +12,56 @@ class MainMenu extends StatefulWidget {
 }
 
 class MainMenuState extends State<MainMenu> {
+  final ScrollController _scrollController = ScrollController();
+  @override
+  void initState() {
+    _scrollController.addListener(scrolled);
+    super.initState();
+  }
+
+  void scrolled() {
+    if (_scrollController.hasClients) {
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        //TODO
+      } else if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        //TODO
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     bool _isWidthMoreThan600 = false;
     bool _isWidthMoreThan660 = false;
+
     if (_width > 660) {
       _isWidthMoreThan660 = true;
     } else if (_width > 600) {
       _isWidthMoreThan600 = true;
       _isWidthMoreThan660 = false;
     }
+
     return Scaffold(
       body: Container(
           color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
           child: ListView.builder(
+            physics: BouncingScrollPhysics(),
+            controller: _scrollController,
             itemCount: booksList.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final Book book = booksList[index];
               bool isMarked = favoriteBookList.contains(book);
 
-              print(book);
               return InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {

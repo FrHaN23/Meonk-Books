@@ -107,8 +107,8 @@ class MainState extends State<Main> {
             global.isDarkModeEnabled ? Colors.black : Colors.amber[500],
         foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
         renderOverlay: false,
-        overlayOpacity: 0.3,
-        visible: true,
+        overlayOpacity: 0,
+        visible: global.isScrollDown ? false : true,
         closeManually: false,
         children: [
           SpeedDialChild(
