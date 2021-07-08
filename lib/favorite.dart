@@ -33,7 +33,7 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor:
-          global.isDarkModeEnabled ? Colors.white : Colors.amber[50],
+          global.isDarkModeEnabled ? Colors.black26 : Colors.amber[50],
       appBar: AppBar(
         brightness:
             global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
@@ -149,7 +149,7 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
         ],
       ),
       body: Container(
-          color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
+          color: global.isDarkModeEnabled ? Colors.white12 : Colors.amber[50],
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             itemCount: favoriteBookList.length,
