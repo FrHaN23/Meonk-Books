@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:buku_meonk/menu.dart';
 import 'package:buku_meonk/favorite.dart';
@@ -30,10 +33,13 @@ class MainState extends State<Main> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        brightness:
+            global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
         title: Text(
           'Buku Meonk',
           style: TextStyle(
-              color: global.isDarkModeEnabled ? Colors.white : Colors.black),
+            color: global.isDarkModeEnabled ? Colors.white : Colors.black,
+          ),
         ),
         backgroundColor:
             global.isDarkModeEnabled ? Colors.black87 : Colors.amber[300],

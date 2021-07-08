@@ -31,18 +31,12 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-    bool _isWidthMoreThan600 = false;
-    bool _isWidthMoreThan660 = false;
-
-    if (_width > 660) {
-      _isWidthMoreThan660 = true;
-    } else if (_width > 600) {
-      _isWidthMoreThan600 = true;
-      _isWidthMoreThan660 = false;
-    }
     return Scaffold(
-      backgroundColor: Colors.amber[50],
+      backgroundColor:
+          global.isDarkModeEnabled ? Colors.white : Colors.amber[50],
       appBar: AppBar(
+        brightness:
+            global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
         title: Text(
           'Favorite',
           style: TextStyle(
@@ -162,7 +156,6 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final Book favorited = favoriteBookList[index];
-
               return InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -200,7 +193,7 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
                                     Text(
                                       favorited.title,
                                       style: TextStyle(
-                                          fontSize: 18,
+                                          fontSize: _width < 500 ? 16 : 18,
                                           fontWeight: FontWeight.bold,
                                           color: global.isDarkModeEnabled
                                               ? Colors.white
@@ -213,7 +206,7 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
                                       favorited.author,
                                       style: TextStyle(
                                           fontStyle: FontStyle.italic,
-                                          fontSize: 18,
+                                          fontSize: _width < 500 ? 14 : 16,
                                           color: global.isDarkModeEnabled
                                               ? Colors.white
                                               : null),
@@ -251,7 +244,12 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
                                         ),
                                         Text(
                                           favorited.rating.toString(),
-                                          style: TextStyle(fontSize: 16),
+                                          style: TextStyle(
+                                            color: global.isDarkModeEnabled
+                                                ? Colors.white
+                                                : null,
+                                            fontSize: _width < 600 ? 12 : 16,
+                                          ),
                                         )
                                       ],
                                     ),
@@ -261,9 +259,9 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
                                     ),
                                     Text(
                                       favorited.description,
-                                      maxLines: _isWidthMoreThan660
+                                      maxLines: _width > 660
                                           ? 12
-                                          : _isWidthMoreThan600
+                                          : _width > 660
                                               ? 15
                                               : 8,
                                       overflow: TextOverflow.ellipsis,
@@ -271,6 +269,7 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
                                         color: global.isDarkModeEnabled
                                             ? Colors.white
                                             : null,
+                                        fontSize: _width < 600 ? 12 : 16,
                                       ),
                                     ),
                                     SizedBox(

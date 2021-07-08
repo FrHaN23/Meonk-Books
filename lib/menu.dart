@@ -40,18 +40,10 @@ class MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-    bool _isWidthMoreThan600 = false;
-    bool _isWidthMoreThan660 = false;
-
-    if (_width > 660) {
-      _isWidthMoreThan660 = true;
-    } else if (_width > 600) {
-      _isWidthMoreThan600 = true;
-      _isWidthMoreThan660 = false;
-    }
 
     return Scaffold(
-      body: Container(
+        body: SafeArea(
+      child: Container(
           color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
@@ -99,7 +91,7 @@ class MainMenuState extends State<MainMenu> {
                                     Text(
                                       book.title,
                                       style: TextStyle(
-                                          fontSize: 18,
+                                          fontSize: _width < 500 ? 16 : 18,
                                           fontWeight: FontWeight.bold,
                                           color: global.isDarkModeEnabled
                                               ? Colors.white
@@ -111,11 +103,12 @@ class MainMenuState extends State<MainMenu> {
                                     Text(
                                       book.author,
                                       style: TextStyle(
-                                          fontStyle: FontStyle.italic,
-                                          fontSize: 18,
-                                          color: global.isDarkModeEnabled
-                                              ? Colors.white
-                                              : null),
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: _width < 500 ? 12 : 16,
+                                        color: global.isDarkModeEnabled
+                                            ? Colors.white
+                                            : null,
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 10,
@@ -150,7 +143,12 @@ class MainMenuState extends State<MainMenu> {
                                         ),
                                         Text(
                                           book.rating.toString(),
-                                          style: TextStyle(fontSize: 16),
+                                          style: TextStyle(
+                                            color: global.isDarkModeEnabled
+                                                ? Colors.white
+                                                : null,
+                                            fontSize: _width < 500 ? 12 : 14,
+                                          ),
                                         )
                                       ],
                                     ),
@@ -160,16 +158,17 @@ class MainMenuState extends State<MainMenu> {
                                     ),
                                     Text(
                                       book.description,
-                                      maxLines: _isWidthMoreThan660
+                                      maxLines: _width > 660
                                           ? 12
-                                          : _isWidthMoreThan600
+                                          : _width > 600
                                               ? 15
-                                              : 8,
+                                              : 4,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: global.isDarkModeEnabled
                                             ? Colors.white
                                             : null,
+                                        fontSize: _width < 600 ? 12 : 16,
                                       ),
                                     ),
                                     SizedBox(
@@ -186,7 +185,6 @@ class MainMenuState extends State<MainMenu> {
                               setState(() {
                                 if (isMarked) {
                                   favoriteBookList.remove(book);
-                                  print("ini jalan");
                                 } else {
                                   favoriteBookList.add(book);
                                   print(favoriteBookList);
@@ -197,11 +195,13 @@ class MainMenuState extends State<MainMenu> {
                               isMarked
                                   ? Icons.bookmark
                                   : Icons.bookmark_outline,
-                              size: _isWidthMoreThan660
+                              size: _width > 660
                                   ? 35
-                                  : _isWidthMoreThan600
+                                  : _width > 600
                                       ? 40
-                                      : 30,
+                                      : _width > 500
+                                          ? 35
+                                          : 27,
                             ),
                             color:
                                 global.isDarkModeEnabled ? Colors.white : null,
@@ -214,6 +214,6 @@ class MainMenuState extends State<MainMenu> {
               );
             },
           )),
-    );
+    ));
   }
 }
