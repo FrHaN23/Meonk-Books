@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/info.dart';
 import 'package:flutter/rendering.dart';
-
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buku_meonk/global.dart' as global;
 
@@ -52,12 +51,15 @@ class MainMenuState extends State<MainMenu> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final Book book = booksList[index];
-              bool isMarked = favoriteBookList.contains(book);
+              var isMarked = favoriteBookList.contains(book);
 
               return InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return InfoScreen(book: book);
+                    return InfoScreen(
+                      book: book,
+                      isMarked: isMarked,
+                    );
                   }));
                 },
                 child: Card(
@@ -162,13 +164,13 @@ class MainMenuState extends State<MainMenu> {
                                           ? 12
                                           : _width > 600
                                               ? 15
-                                              : 4,
+                                              : 5,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: global.isDarkModeEnabled
                                             ? Colors.white
                                             : null,
-                                        fontSize: _width < 600 ? 12 : 16,
+                                        fontSize: _width < 600 ? 11 : 16,
                                       ),
                                     ),
                                     SizedBox(

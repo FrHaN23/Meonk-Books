@@ -156,10 +156,14 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final Book favorited = favoriteBookList[index];
+
               return InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return InfoScreen(book: favorited);
+                    return InfoScreen(
+                      book: favorited,
+                      isMarked: false,
+                    );
                   }));
                 },
                 child: Card(

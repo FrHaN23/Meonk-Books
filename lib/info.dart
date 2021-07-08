@@ -6,39 +6,43 @@ import 'package:buku_meonk/global.dart' as global;
 
 class InfoScreen extends StatefulWidget {
   final Book book;
-  InfoScreen({required this.book});
+  final bool isMarked;
+  InfoScreen({required this.book, required this.isMarked});
   @override
-  InfoScreenState createState() => InfoScreenState(book: book);
+  InfoScreenState createState() =>
+      InfoScreenState(book: book, isMarked: isMarked);
 }
 
 class InfoScreenState extends State<InfoScreen> {
   final Book book;
-
-  InfoScreenState({required this.book});
+  final bool isMarked;
+  InfoScreenState({required this.book, required this.isMarked});
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext contex, BoxConstraints constrains) {
-      return InfoScreenMobile(book: book);
+      return InfoScreenMobile(book: book, isMarked: isMarked);
     });
   }
 }
 
 class InfoScreenMobile extends StatefulWidget {
   final Book book;
-  InfoScreenMobile({required this.book});
+  final bool isMarked;
+  InfoScreenMobile({required this.book, required this.isMarked});
   @override
-  InfoScreenMobileState createState() => InfoScreenMobileState(
-        book: book,
-      );
+  InfoScreenMobileState createState() =>
+      InfoScreenMobileState(book: book, isMarked: isMarked);
 }
 
 class InfoScreenMobileState extends State<InfoScreenMobile> {
   final Book book;
-  InfoScreenMobileState({required this.book});
+  final bool isMarked;
+  InfoScreenMobileState({required this.book, required this.isMarked});
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
+    var isMarked = favoriteBookList.contains(book);
     return Scaffold(
       backgroundColor:
           global.isDarkModeEnabled ? Colors.black54 : Colors.amber[100],
@@ -49,6 +53,30 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
         iconTheme: IconThemeData(
           color: global.isDarkModeEnabled ? Colors.white : Colors.black,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                if (isMarked) {
+                  favoriteBookList.remove(book);
+                } else {
+                  favoriteBookList.add(book);
+                  print(favoriteBookList);
+                }
+              });
+            },
+            icon: Icon(
+              isMarked ? Icons.bookmark : Icons.bookmark_outline,
+              size: _width > 660
+                  ? 35
+                  : _width > 600
+                      ? 40
+                      : _width > 500
+                          ? 35
+                          : 27,
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
