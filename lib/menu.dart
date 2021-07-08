@@ -170,7 +170,11 @@ class MainMenuState extends State<MainMenu> {
                                         color: global.isDarkModeEnabled
                                             ? Colors.white
                                             : null,
-                                        fontSize: _width < 600 ? 11 : 16,
+                                        fontSize: _width < 600
+                                            ? 14
+                                            : _width < 700
+                                                ? 16
+                                                : 20,
                                       ),
                                     ),
                                     SizedBox(

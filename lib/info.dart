@@ -67,15 +67,9 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
             },
             icon: Icon(
               isMarked ? Icons.bookmark : Icons.bookmark_outline,
-              size: _width > 660
-                  ? 35
-                  : _width > 600
-                      ? 40
-                      : _width > 500
-                          ? 35
-                          : 27,
+              size: _width > 660 ? 35 : 27,
             ),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
