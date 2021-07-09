@@ -223,3 +223,76 @@ class MainMenuState extends State<MainMenu> {
     ));
   }
 }
+
+class MainMenuGrid extends StatefulWidget {
+  @override
+  MainMenuGridState createState() => MainMenuGridState();
+}
+
+class MainMenuGridState extends State<MainMenuGrid> {
+  @override
+  Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
+    return Scrollbar(
+        isAlwaysShown: true,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: GridView.count(
+            crossAxisCount: _width < 600 ? 2 : 4,
+            children: booksList.map((book) {
+              var isMarked = favoriteBookList.contains(book);
+              return InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return InfoScreen(book: book, isMarked: isMarked);
+                  }));
+                },
+                child: Card(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        child: Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: Image.network(
+                                  book.bookThumbnail,
+                                  fit: BoxFit.fill,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              width: 120,
+                              height: 48,
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 20),
+                                child: Text(
+                                  book.title,
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              )),
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ));
+  }
+}

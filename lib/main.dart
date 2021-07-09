@@ -29,6 +29,7 @@ class Main extends StatefulWidget {
 class MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
+    //double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         brightness:
@@ -99,6 +100,25 @@ class MainState extends State<Main> {
                 ));
               },
             ),
+            ListTile(
+              leading: Icon(
+                Icons.coffee_sharp,
+                color: global.isDarkModeEnabled ? Colors.white : null,
+              ),
+              title: Text(
+                'Saweria',
+                style: TextStyle(
+                    color: global.isDarkModeEnabled ? Colors.white : null),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return FavoriteScreen();
+                  },
+                ));
+              },
+            ),
           ],
         ),
       )),
@@ -147,6 +167,9 @@ class MainState extends State<Main> {
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth > 800) {
+            return MainMenuGrid();
+          }
           return MainMenu();
         },
       ),
