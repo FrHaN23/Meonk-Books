@@ -23,7 +23,7 @@ var booksList = [
       description:
           'Written as an homage to Homer’s epic poem The Odyssey, Ulysses follows its hero, Leopold Bloom, through the streets of Dublin. Overflowing with puns, references to classical literature, and stream-of-consciousness writing, this is a complex, multilayered novel about one day in the life of an ordinary man. Initially banned in the United States but overturned by a legal challenge by Random House’s Bennett Cerf, Ulysses was called “a memorable catastrophe” (Virginia Woolf), “a book to which we are all indebted” (T. S. Eliot), and “the most faithful X-ray ever taken of the ordinary human consciousness” (Edmund Wilson). Joyce himself said, “There is not one single serious line in [Ulysses].',
       bookThumbnail:
-          'https://upload.wikimedia.org/wikipedia/commons/a/ab/JoyceUlysses2.jpg',
+          'https://s3-us-west-2.amazonaws.com/tabs.web.media/5/7/5767/5767-square-1536.jpg',
       bookCover:
           'https://upload.wikimedia.org/wikipedia/commons/a/ab/JoyceUlysses2.jpg'),
   Book(

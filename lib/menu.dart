@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/info.dart';
@@ -78,6 +80,7 @@ class MainMenuState extends State<MainMenu> {
                             borderRadius: BorderRadius.circular(10),
                             child: Image.network(
                               book.bookThumbnail,
+                              height: 250,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -160,11 +163,11 @@ class MainMenuState extends State<MainMenu> {
                                     ),
                                     Text(
                                       book.description,
-                                      maxLines: _width > 660
-                                          ? 12
-                                          : _width > 600
-                                              ? 15
-                                              : 5,
+                                      maxLines: _width < 500
+                                          ? 5
+                                          : _width < 600
+                                              ? 7
+                                              : 10,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: global.isDarkModeEnabled
@@ -173,7 +176,7 @@ class MainMenuState extends State<MainMenu> {
                                         fontSize: _width < 600
                                             ? 14
                                             : _width < 700
-                                                ? 16
+                                                ? 14
                                                 : 20,
                                       ),
                                     ),
@@ -248,48 +251,39 @@ class MainMenuGridState extends State<MainMenuGrid> {
                   }));
                 },
                 child: Card(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Container(
-                        child: Expanded(
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: Image.network(
-                                  book.bookThumbnail,
-                                  fit: BoxFit.fill,
-                                ),
-                              )
-                            ],
-                          ),
+                    color: Colors.white,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              width: 120,
-                              height: 48,
-                              child: Padding(
-                                padding: EdgeInsets.only(bottom: 20),
-                                child: Text(
-                                  book.title,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 12),
-                                ),
-                              )),
-                          SizedBox(
-                            height: 10,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                        Expanded(
+                            child: Container(
+                          width: 100,
+                          height: 100,
+                          child: Image.network(
+                            book.bookThumbnail,
+                          ),
+                        )),
+                        Expanded(
+                            child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                              Container(
+                                  padding: EdgeInsets.fromLTRB(15, 35, 0, 5),
+                                  width: 100,
+                                  child: Text(
+                                    book.title,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                    ),
+                                  ))
+                            ]))
+                      ],
+                    )),
               );
             }).toList(),
           ),
