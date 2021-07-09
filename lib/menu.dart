@@ -74,6 +74,9 @@ class MainMenuState extends State<MainMenu> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        SizedBox(
+                          width: 5,
+                        ),
                         Expanded(
                           flex: 3,
                           child: ClipRRect(
@@ -163,11 +166,7 @@ class MainMenuState extends State<MainMenu> {
                                     ),
                                     Text(
                                       book.description,
-                                      maxLines: _width < 500
-                                          ? 5
-                                          : _width < 600
-                                              ? 7
-                                              : 10,
+                                      maxLines: _width < 500 ? 5 : 8,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: global.isDarkModeEnabled
@@ -177,7 +176,7 @@ class MainMenuState extends State<MainMenu> {
                                             ? 14
                                             : _width < 700
                                                 ? 14
-                                                : 20,
+                                                : 16,
                                       ),
                                     ),
                                     SizedBox(
@@ -237,12 +236,13 @@ class MainMenuGridState extends State<MainMenuGrid> {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return Scrollbar(
-        isAlwaysShown: true,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: GridView.count(
-            crossAxisCount: _width < 600 ? 2 : 4,
-            children: booksList.map((book) {
+      isAlwaysShown: true,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: GridView.count(
+          crossAxisCount: _width < 850 ? 2 : 4,
+          children: booksList.map(
+            (book) {
               var isMarked = favoriteBookList.contains(book);
               return InkWell(
                 onTap: () {
@@ -251,42 +251,51 @@ class MainMenuGridState extends State<MainMenuGrid> {
                   }));
                 },
                 child: Card(
-                    color: Colors.white,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        SizedBox(
-                          width: 10,
+                  color: Colors.white,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                          child: Container(
+                        width: 100,
+                        height: 100,
+                        child: Image.network(
+                          book.bookThumbnail,
                         ),
-                        Expanded(
-                            child: Container(
-                          width: 100,
-                          height: 100,
-                          child: Image.network(
-                            book.bookThumbnail,
-                          ),
-                        )),
-                        Expanded(
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                              Container(
-                                  padding: EdgeInsets.fromLTRB(15, 35, 0, 5),
-                                  width: 100,
-                                  child: Text(
-                                    book.title,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12,
-                                    ),
-                                  ))
-                            ]))
-                      ],
-                    )),
+                      )),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.fromLTRB(15, 35, 0, 5),
+                              width: 100,
+                              child: Text(
+                                book.title,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Text("chilld"),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               );
-            }).toList(),
-          ),
-        ));
+            },
+          ).toList(),
+        ),
+      ),
+    );
   }
 }
