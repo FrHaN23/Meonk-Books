@@ -27,6 +27,7 @@ class Main extends StatefulWidget {
 }
 
 class MainState extends State<Main> {
+  bool isGridModeEnabled = false;
   @override
   Widget build(BuildContext context) {
     //double _width = MediaQuery.of(context).size.width;
@@ -45,6 +46,16 @@ class MainState extends State<Main> {
         foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
         iconTheme: IconThemeData(
             color: global.isDarkModeEnabled ? Colors.white : Colors.black),
+        actions: [
+          IconButton(
+            onPressed: () {
+              isGridModeEnabled = !isGridModeEnabled;
+              print(isGridModeEnabled);
+              runApp(MyApp());
+            },
+            icon: Icon(Icons.auto_awesome_mosaic_outlined),
+          )
+        ],
       ),
       drawer: Drawer(
           child: Container(
@@ -167,7 +178,7 @@ class MainState extends State<Main> {
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth > 800) {
+          if (constraints.maxWidth > 800 || isGridModeEnabled) {
             return MainMenuGrid();
           }
           return MainMenu();

@@ -13,42 +13,42 @@ class MainMenu extends StatefulWidget {
 }
 
 class MainMenuState extends State<MainMenu> {
-  final ScrollController _scrollController = ScrollController();
+  // final ScrollController _scrollController = ScrollController();
   @override
-  void initState() {
-    _scrollController.addListener(scrolled);
-    super.initState();
-  }
+  // void initState() {
+  //   _scrollController.addListener(scrolled);
+  //   super.initState();
+  // }
 
-  void scrolled() {
-    if (_scrollController.hasClients) {
-      if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.reverse) {
-        //TODO
-      } else if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.forward) {
-        //TODO
-      }
-    }
-  }
+  // void scrolled() {
+  //   if (_scrollController.hasClients) {
+  //     if (_scrollController.position.userScrollDirection ==
+  //         ScrollDirection.reverse) {
+  //       //TODO
+  //     } else if (_scrollController.position.userScrollDirection ==
+  //         ScrollDirection.forward) {
+  //       //TODO
+  //     }
+  //   }
+  // }
 
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _scrollController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-
+    print(_width);
     return Scaffold(
         body: SafeArea(
       child: Container(
           color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
-            controller: _scrollController,
+            // controller: _scrollController,
             itemCount: booksList.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
@@ -166,7 +166,11 @@ class MainMenuState extends State<MainMenu> {
                                     ),
                                     Text(
                                       book.description,
-                                      maxLines: _width < 500 ? 5 : 8,
+                                      maxLines: _width < 400
+                                          ? 8
+                                          : _width < 500
+                                              ? 5
+                                              : 8,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: global.isDarkModeEnabled
@@ -234,88 +238,95 @@ class MainMenuGridState extends State<MainMenuGrid> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-    print(_width);
     return Scrollbar(
-      isAlwaysShown: true,
-      child: Padding(
-        padding: const EdgeInsets.all(0),
-        child: GridView.count(
-          crossAxisCount: _width < 850
-              ? 2
-              : _width < 1300
-                  ? 3
-                  : 4,
-          children: booksList.map(
-            (book) {
-              var isMarked = favoriteBookList.contains(book);
-              return InkWell(
-                onDoubleTap: () {
-                  setState(() {
-                    if (isMarked) {
-                      favoriteBookList.remove(book);
-                    } else {
-                      favoriteBookList.add(book);
-                    }
-                  });
-                },
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return InfoScreen(book: book, isMarked: isMarked);
-                  }));
-                },
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Image.network(
-                              book.bookThumbnail,
-                              width: 300,
-                              height: 300,
-                              fit: BoxFit.cover,
+      child: Container(
+        color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: GridView.count(
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: _width < 600
+                ? 1
+                : _width < 850
+                    ? 2
+                    : _width < 1300
+                        ? 3
+                        : 4,
+            children: booksList.map(
+              (book) {
+                var isMarked = favoriteBookList.contains(book);
+                return InkWell(
+                  onDoubleTap: () {
+                    setState(() {
+                      if (isMarked) {
+                        favoriteBookList.remove(book);
+                      } else {
+                        favoriteBookList.add(book);
+                      }
+                    });
+                  },
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return InfoScreen(book: book, isMarked: isMarked);
+                    }));
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Image.network(
+                                book.bookThumbnail,
+                                width: 300,
+                                height: 300,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            child: Container(
-                          color:
-                              isMarked ? Colors.black.withOpacity(0.18) : null,
-                        ))
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          width: 300,
-                          margin: EdgeInsets.only(bottom: 10),
-                          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                          color: Colors.black.withOpacity(0.7),
-                          child: Text(
-                            book.title,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: Container(
+                            color: isMarked
+                                ? Colors.black.withOpacity(0.18)
+                                : null,
+                          ))
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 300,
+                            margin: EdgeInsets.only(bottom: 10),
+                            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                            color: Colors.black.withOpacity(0.7),
+                            child: Text(
+                              book.title,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              );
-            },
-          ).toList(),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              },
+            ).toList(),
+          ),
         ),
       ),
     );
