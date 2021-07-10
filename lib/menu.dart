@@ -195,7 +195,6 @@ class MainMenuState extends State<MainMenu> {
                                   favoriteBookList.remove(book);
                                 } else {
                                   favoriteBookList.add(book);
-                                  print(favoriteBookList);
                                 }
                               });
                             },
@@ -235,61 +234,84 @@ class MainMenuGridState extends State<MainMenuGrid> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
+    print(_width);
     return Scrollbar(
       isAlwaysShown: true,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(0),
         child: GridView.count(
-          crossAxisCount: _width < 850 ? 2 : 4,
+          crossAxisCount: _width < 850
+              ? 2
+              : _width < 1300
+                  ? 3
+                  : 4,
           children: booksList.map(
             (book) {
               var isMarked = favoriteBookList.contains(book);
               return InkWell(
+                onDoubleTap: () {
+                  setState(() {
+                    if (isMarked) {
+                      favoriteBookList.remove(book);
+                    } else {
+                      favoriteBookList.add(book);
+                    }
+                  });
+                },
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return InfoScreen(book: book, isMarked: isMarked);
                   }));
                 },
-                child: Card(
-                  color: Colors.white,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                          child: Container(
-                        width: 100,
-                        height: 100,
-                        child: Image.network(
-                          book.bookThumbnail,
-                        ),
-                      )),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.fromLTRB(15, 35, 0, 5),
-                              width: 100,
-                              child: Text(
-                                book.title,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                ),
-                              ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Image.network(
+                              book.bookThumbnail,
+                              width: 300,
+                              height: 300,
+                              fit: BoxFit.cover,
                             ),
-                            Container(
-                              child: Text("chilld"),
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: Container(
+                          color:
+                              isMarked ? Colors.black.withOpacity(0.18) : null,
+                        ))
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: 300,
+                          margin: EdgeInsets.only(bottom: 10),
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          color: Colors.black.withOpacity(0.7),
+                          child: Text(
+                            book.title,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               );
             },
