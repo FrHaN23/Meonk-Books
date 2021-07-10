@@ -157,22 +157,36 @@ class MainState extends State<Main> {
             onTap: () => setState(() {
               global.isDarkModeEnabled = !global.isDarkModeEnabled;
             }),
-            onLongPress: () => print('FIRST CHILD LONG PRESS'),
           ),
           SpeedDialChild(
-            child: Icon(Icons.brush),
-            backgroundColor: Colors.blue,
-            label: 'Sort By alhabetical order',
-            labelStyle: TextStyle(fontSize: 18.0),
+            child: Icon(
+              Icons.sort_by_alpha,
+              color: global.isDarkModeEnabled ? Colors.white : null,
+            ),
+            backgroundColor:
+                global.isDarkModeEnabled ? Colors.blue : Colors.amber,
             onTap: () {
-              booksList.sort((b, a) {
-                return a.title
-                    .toString()
-                    .toLowerCase()
-                    .compareTo(b.title.toString().toLowerCase());
-              });
+              isOrderByAlphabetical = !isOrderByAlphabetical;
+              if (isOrderByAlphabetical) {
+                booksList.sort((a, b) {
+                  print("isOrder true");
+                  return a.title
+                      .toString()
+                      .toLowerCase()
+                      .compareTo(b.title.toString().toLowerCase());
+                });
+                runApp(MyApp());
+              } else {
+                booksList.sort((a, b) {
+                  print("isOrder false");
+                  return b.title
+                      .toString()
+                      .toLowerCase()
+                      .compareTo(a.title.toString().toLowerCase());
+                });
+                runApp(MyApp());
+              }
             },
-            onLongPress: () => print('SECOND CHILD LONG PRESS'),
           ),
           SpeedDialChild(
             child: Icon(Icons.keyboard_voice),

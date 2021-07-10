@@ -90,7 +90,7 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                                 fit: BoxFit.fill),
                           ),
                           width: _width,
-                          height: 400,
+                          height: _width > 1200 ? 500 : 400,
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
@@ -102,9 +102,10 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                     Expanded(
                       child: Container(
                         width: _width,
-                        height: 350,
+                        height: _width > 1200 ? 400 : 350,
                         child: Container(
-                          padding: EdgeInsets.only(top: 55),
+                          padding:
+                              EdgeInsets.only(top: _width > 1200 ? 100 : 55),
                           child: Center(
                               child: Image.network(
                             book.bookCover,

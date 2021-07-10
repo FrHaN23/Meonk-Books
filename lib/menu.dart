@@ -52,12 +52,12 @@ class MainMenuState extends State<MainMenu> {
             itemCount: booksList.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              booksList.sort((a, b) {
-                return a.title
-                    .toString()
-                    .toLowerCase()
-                    .compareTo(b.title.toString().toLowerCase());
-              });
+              // booksList.sort((a, b) {
+              //   return b.title
+              //       .toString()
+              //       .toLowerCase()
+              //       .compareTo(a.title.toString().toLowerCase());
+              // });
               final Book book = booksList[index];
               var isMarked = favoriteBookList.contains(book);
 
@@ -189,15 +189,11 @@ class MainMenuState extends State<MainMenu> {
                                                 : 17,
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
                                     //Text(
                                     //    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
                                   ],
                                 ))),
-                        Expanded(
-                          flex: 1,
+                        Container(
                           child: IconButton(
                             onPressed: () {
                               setState(() {
@@ -212,13 +208,11 @@ class MainMenuState extends State<MainMenu> {
                               isMarked
                                   ? Icons.bookmark
                                   : Icons.bookmark_outline,
-                              size: _width > 660
-                                  ? 35
-                                  : _width > 600
-                                      ? 40
-                                      : _width > 500
-                                          ? 35
-                                          : 27,
+                              size: _width < 500
+                                  ? 30
+                                  : _width < 600
+                                      ? 35
+                                      : 40,
                             ),
                             color:
                                 global.isDarkModeEnabled ? Colors.white : null,

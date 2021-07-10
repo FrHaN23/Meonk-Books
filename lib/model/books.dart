@@ -83,7 +83,7 @@ var booksList = [
       bookThumbnail:
           'https://mir-s3-cdn-cf.behance.net/project_modules/disp/452ff49083859.560c8304b8a63.png',
       bookCover:
-          'https://cdn2.penguin.com.au/covers/original/9780099529125.jpg'),
+          'https://mir-s3-cdn-cf.behance.net/project_modules/disp/452ff49083859.560c8304b8a63.png'),
 ];
 
 var favoriteBookList = [];

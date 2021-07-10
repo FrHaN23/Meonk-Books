@@ -28,6 +28,7 @@ class FavoriteScreenMobile extends StatefulWidget {
 }
 
 class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
+  bool isOrderByAlphabetical = false;
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
@@ -128,15 +129,36 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
             onTap: () => setState(() {
               global.isDarkModeEnabled = !global.isDarkModeEnabled;
             }),
-            onLongPress: () => print('FIRST CHILD LONG PRESS'),
           ),
           SpeedDialChild(
-            child: Icon(Icons.brush),
-            backgroundColor: Colors.blue,
-            label: 'Second',
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
-            onLongPress: () => print('SECOND CHILD LONG PRESS'),
+            child: Icon(
+              Icons.sort_by_alpha,
+              color: global.isDarkModeEnabled ? Colors.white : null,
+            ),
+            backgroundColor:
+                global.isDarkModeEnabled ? Colors.blue : Colors.amber,
+            onTap: () {
+              isOrderByAlphabetical = !isOrderByAlphabetical;
+              if (isOrderByAlphabetical) {
+                favoriteBookList.sort((a, b) {
+                  print("isOrder true");
+                  return a.title
+                      .toString()
+                      .toLowerCase()
+                      .compareTo(b.title.toString().toLowerCase());
+                });
+                runApp(MyApp());
+              } else {
+                favoriteBookList.sort((a, b) {
+                  print("isOrder false");
+                  return b.title
+                      .toString()
+                      .toLowerCase()
+                      .compareTo(a.title.toString().toLowerCase());
+                });
+                runApp(MyApp());
+              }
+            },
           ),
           SpeedDialChild(
             child: Icon(Icons.keyboard_voice),
@@ -263,11 +285,11 @@ class FavoriteScreenMobileState extends State<FavoriteScreenMobile> {
                                     ),
                                     Text(
                                       favorited.description,
-                                      maxLines: _width > 660
-                                          ? 12
-                                          : _width > 660
-                                              ? 15
-                                              : 8,
+                                      maxLines: _width < 400
+                                          ? 10
+                                          : _width < 500
+                                              ? 5
+                                              : 7,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: global.isDarkModeEnabled
