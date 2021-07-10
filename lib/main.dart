@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:buku_meonk/menu.dart';
+import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/favorite.dart';
 import 'package:buku_meonk/global.dart' as global;
 
@@ -28,6 +29,7 @@ class Main extends StatefulWidget {
 
 class MainState extends State<Main> {
   bool isGridModeEnabled = false;
+  bool isOrderByAlphabetical = false;
   @override
   Widget build(BuildContext context) {
     //double _width = MediaQuery.of(context).size.width;
@@ -50,7 +52,6 @@ class MainState extends State<Main> {
           IconButton(
             onPressed: () {
               isGridModeEnabled = !isGridModeEnabled;
-              print(isGridModeEnabled);
               runApp(MyApp());
             },
             icon: Icon(Icons.auto_awesome_mosaic_outlined),
@@ -161,9 +162,16 @@ class MainState extends State<Main> {
           SpeedDialChild(
             child: Icon(Icons.brush),
             backgroundColor: Colors.blue,
-            label: 'Second',
+            label: 'Sort By alhabetical order',
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
+            onTap: () {
+              booksList.sort((b, a) {
+                return a.title
+                    .toString()
+                    .toLowerCase()
+                    .compareTo(b.title.toString().toLowerCase());
+              });
+            },
             onLongPress: () => print('SECOND CHILD LONG PRESS'),
           ),
           SpeedDialChild(
@@ -178,7 +186,7 @@ class MainState extends State<Main> {
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth > 800 || isGridModeEnabled) {
+          if (constraints.maxWidth > 650 || isGridModeEnabled) {
             return MainMenuGrid();
           }
           return MainMenu();

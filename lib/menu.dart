@@ -52,6 +52,12 @@ class MainMenuState extends State<MainMenu> {
             itemCount: booksList.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
+              booksList.sort((a, b) {
+                return a.title
+                    .toString()
+                    .toLowerCase()
+                    .compareTo(b.title.toString().toLowerCase());
+              });
               final Book book = booksList[index];
               var isMarked = favoriteBookList.contains(book);
 
@@ -170,17 +176,17 @@ class MainMenuState extends State<MainMenu> {
                                           ? 8
                                           : _width < 500
                                               ? 5
-                                              : 8,
+                                              : 7,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: global.isDarkModeEnabled
                                             ? Colors.white
                                             : null,
                                         fontSize: _width < 600
-                                            ? 14
+                                            ? 15
                                             : _width < 700
-                                                ? 14
-                                                : 16,
+                                                ? 16
+                                                : 17,
                                       ),
                                     ),
                                     SizedBox(
@@ -238,6 +244,7 @@ class MainMenuGridState extends State<MainMenuGrid> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
+    print(_width.toString());
     return Scrollbar(
       child: Container(
         color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
@@ -246,15 +253,23 @@ class MainMenuGridState extends State<MainMenuGrid> {
           child: GridView.count(
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            crossAxisCount: _width < 600
+            crossAxisCount: _width < 700
                 ? 1
-                : _width < 850
+                : _width < 1100
                     ? 2
                     : _width < 1300
                         ? 3
-                        : 4,
+                        : _width < 1600
+                            ? 4
+                            : 5,
             children: booksList.map(
               (book) {
+                booksList.sort((a, b) {
+                  return a.title
+                      .toString()
+                      .toLowerCase()
+                      .compareTo(b.title.toString().toLowerCase());
+                });
                 var isMarked = favoriteBookList.contains(book);
                 return InkWell(
                   onDoubleTap: () {
