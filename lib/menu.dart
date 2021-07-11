@@ -166,26 +166,24 @@ class MainMenuState extends State<MainMenu> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    Container(
-                                      width: 300,
-                                      child: Text(
-                                        book.description,
-                                        maxLines: _width < 400
-                                            ? 8
-                                            : _width < 500
-                                                ? 5
-                                                : 7,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          color: global.isDarkModeEnabled
-                                              ? Colors.white
-                                              : null,
-                                          fontSize: _width < 600
-                                              ? 15
-                                              : _width < 700
-                                                  ? 16
-                                                  : 17,
-                                        ),
+                                    Text(
+                                      book.description,
+                                      maxLines: _width < 400
+                                          ? 8
+                                          : _width < 500
+                                              ? 5
+                                              : 7,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                        color: global.isDarkModeEnabled
+                                            ? Colors.white
+                                            : null,
+                                        fontSize: _width < 600
+                                            ? 15
+                                            : _width < 700
+                                                ? 16
+                                                : 17,
                                       ),
                                     ),
 
@@ -194,7 +192,6 @@ class MainMenuState extends State<MainMenu> {
                                   ],
                                 ))),
                         Container(
-                          height: 1,
                           child: IconButton(
                             onPressed: () {
                               setState(() {

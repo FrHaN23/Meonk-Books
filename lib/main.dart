@@ -28,8 +28,6 @@ class MyApp extends StatelessWidget {
 
 // ignore: must_be_immutable
 class Main extends StatelessWidget {
-  bool isGridModeEnabled = false;
-  bool isOrderByAlphabetical = false;
   @override
   Widget build(BuildContext context) {
     //double _width = MediaQuery.of(context).size.width;
