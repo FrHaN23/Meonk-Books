@@ -49,9 +49,8 @@ class MainMenuState extends State<MainMenu> {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     print(_width);
-    return Scaffold(
-        body: SafeArea(
-            child: WillPopScope(
+    return SafeArea(
+        child: WillPopScope(
       onWillPop: () async {
         if (isDialOpen.value) {
           isDialOpen.value = false;
@@ -233,7 +232,7 @@ class MainMenuState extends State<MainMenu> {
               );
             },
           )),
-    )));
+    ));
   }
 }
 
@@ -249,17 +248,17 @@ class MainMenuGridState extends State<MainMenuGrid> {
     print(_width.toString());
     return Scrollbar(
       child: Container(
-        color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
+        color: global.isDarkModeEnabled ? Colors.white10 : Colors.amber[50],
         child: Padding(
           padding: EdgeInsets.all(15),
           child: GridView.count(
-            crossAxisSpacing: 10,
+            crossAxisSpacing: 5,
             mainAxisSpacing: 10,
-            crossAxisCount: _width < 700
-                ? 1
-                : _width < 1100
+            crossAxisCount: _width < 400
+                ? 2
+                : _width < 600
                     ? 2
-                    : _width < 1300
+                    : _width < 700
                         ? 3
                         : _width < 1600
                             ? 4
@@ -272,10 +271,23 @@ class MainMenuGridState extends State<MainMenuGrid> {
                     setState(() {
                       if (isMarked) {
                         favoriteBookList.remove(book);
+                        final snackBar = SnackBar(
+                          content: Text('Removed from favorite'),
+                          duration: Duration(seconds: 1),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              favoriteBookList.add(book);
+                              runApp(MyApp());
+                            },
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       } else {
                         favoriteBookList.add(book);
                         final snackBar = SnackBar(
                           content: Text('Added to favorite'),
+                          duration: Duration(seconds: 1),
                           action: SnackBarAction(
                             label: 'Undo',
                             onPressed: () {
@@ -303,11 +315,14 @@ class MainMenuGridState extends State<MainMenuGrid> {
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(10),
-                              child: Image.network(
-                                book.bookThumbnail,
-                                width: 300,
-                                height: 300,
-                                fit: BoxFit.cover,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: Image.network(
+                                  book.bookThumbnail,
+                                  width: 300,
+                                  height: 300,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -318,10 +333,13 @@ class MainMenuGridState extends State<MainMenuGrid> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
-                              child: Container(
-                            color: isMarked
-                                ? Colors.black.withOpacity(0.18)
-                                : null,
+                              child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              color: isMarked
+                                  ? Colors.black.withOpacity(0.19)
+                                  : null,
+                            ),
                           ))
                         ],
                       ),
@@ -331,13 +349,16 @@ class MainMenuGridState extends State<MainMenuGrid> {
                         children: [
                           Container(
                             width: 300,
-                            margin: EdgeInsets.only(bottom: 10),
+                            margin: EdgeInsets.only(
+                                bottom: 10, left: 10, right: 10),
                             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                            color: Colors.black.withOpacity(0.7),
+                            color: Colors.black.withOpacity(0.4),
                             child: Text(
                               book.title,
+                              softWrap: true,
                               style: TextStyle(
                                   color: Colors.white,
+                                  fontSize: _width < 600 ? 11 : 14,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),

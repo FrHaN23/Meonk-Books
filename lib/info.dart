@@ -304,13 +304,13 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
                         padding: EdgeInsets.only(top: 10),
                         child: Center(
                             child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(vertical: 16),
                               child: Text(
                                 book.title,
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 19,

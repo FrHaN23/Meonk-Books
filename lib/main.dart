@@ -30,6 +30,8 @@ class Main extends StatelessWidget {
     //double _width = MediaQuery.of(context).size.width;
     ValueNotifier<bool> isDialOpen = ValueNotifier(false);
     return Scaffold(
+      backgroundColor:
+          global.isDarkModeEnabled ? Colors.black : Colors.amber[50],
       appBar: AppBarDesign(
         titleAppBar: "Meonk Book",
       ),
@@ -70,24 +72,29 @@ class _AppBarDesignState extends State<AppBarDesign> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: AppBar(
-      brightness: global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
-      title: Text(
-        titleAppBar,
-        style: TextStyle(
-          color: global.isDarkModeEnabled ? Colors.white : Colors.black,
+        child: ClipRRect(
+      borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+      child: AppBar(
+        brightness:
+            global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
+        title: Text(
+          titleAppBar,
+          style: TextStyle(
+            color: global.isDarkModeEnabled ? Colors.white : Colors.black,
+          ),
         ),
+        backgroundColor:
+            global.isDarkModeEnabled ? Colors.black26 : Colors.amber[300],
+        foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
+        iconTheme: IconThemeData(
+            color: global.isDarkModeEnabled ? Colors.white : Colors.black),
+        actions: <Widget>[
+          MediaQuery.of(context).size.width < 650
+              ? ChangeToGridButton()
+              : Container()
+        ],
       ),
-      backgroundColor:
-          global.isDarkModeEnabled ? Colors.black87 : Colors.amber[300],
-      foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
-      iconTheme: IconThemeData(
-          color: global.isDarkModeEnabled ? Colors.white : Colors.black),
-      actions: <Widget>[
-        MediaQuery.of(context).size.width < 650
-            ? ChangeToGridButton()
-            : Container()
-      ],
     ));
   }
 }
@@ -150,7 +157,8 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 onTap: () {
                   if (currentRoute != '/') {
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, '/');
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Main()));
                   } else {
                     Navigator.pop(context);
                   }
@@ -169,7 +177,10 @@ class _DrawerDesignState extends State<DrawerDesign> {
                   onTap: () {
                     if (currentRoute != '/favorite') {
                       Navigator.pop(context);
-                      Navigator.pushNamed(context, '/favorite');
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FavoriteScreen()));
                     } else {
                       Navigator.pop(context);
                     }
@@ -221,11 +232,10 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
   @override
   Widget build(BuildContext context) {
     return SpeedDial(
+      elevation: 0,
       animatedIcon: AnimatedIcons.menu_close,
       openCloseDial: isDialOpen,
-      icon: Icons.keyboard_control,
       activeIcon: Icons.remove,
-      overlayColor: Colors.white,
       backgroundColor:
           global.isDarkModeEnabled ? Colors.black : Colors.amber[500],
       foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
@@ -235,11 +245,13 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
       closeManually: false,
       children: [
         SpeedDialChild(
+          elevation: 0,
           child: Icon(
             global.isDarkModeEnabled ? Icons.light_mode : Icons.dark_mode,
             color: global.isDarkModeEnabled ? Colors.white : null,
           ),
-          backgroundColor: global.isDarkModeEnabled ? Colors.black54 : null,
+          backgroundColor:
+              global.isDarkModeEnabled ? Colors.black : Colors.amber,
           labelStyle: TextStyle(fontSize: 18.0),
           onTap: () => setState(() {
             global.isDarkModeEnabled = !global.isDarkModeEnabled;
@@ -247,12 +259,13 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
           }),
         ),
         SpeedDialChild(
+          elevation: 0,
           child: Icon(
             Icons.sort_by_alpha,
             color: global.isDarkModeEnabled ? Colors.white : null,
           ),
           backgroundColor:
-              global.isDarkModeEnabled ? Colors.blue : Colors.amber,
+              global.isDarkModeEnabled ? Colors.black : Colors.amber,
           onTap: () {
             global.isOrderByAlphabetical = !global.isOrderByAlphabetical;
             if (global.isOrderByAlphabetical) {
@@ -312,5 +325,35 @@ class _SearchBarState extends State<SearchBar> {
         ),
       ],
     );
+  }
+}
+
+// ignore: must_be_immutable
+class ExitPrompt extends StatefulWidget {
+  ExitPrompt({required this.child});
+  Widget child;
+  @override
+  _ExitPromptState createState() => _ExitPromptState(child: child);
+}
+
+class _ExitPromptState extends State<ExitPrompt> {
+  _ExitPromptState({required this.child});
+  DateTime? currentBackPressTime;
+  Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(child: child, onWillPop: onWillPop);
+  }
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      final snackBar = SnackBar(content: Text("Tap again to exit"));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return Future.value(false);
+    }
+    return Future.value(true);
   }
 }
