@@ -49,8 +49,9 @@ class MainMenuState extends State<MainMenu> {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     print(_width);
-    return SafeArea(
-        child: WillPopScope(
+    return Scaffold(
+        body: SafeArea(
+            child: WillPopScope(
       onWillPop: () async {
         if (isDialOpen.value) {
           isDialOpen.value = false;
@@ -232,7 +233,7 @@ class MainMenuState extends State<MainMenu> {
               );
             },
           )),
-    ));
+    )));
   }
 }
 

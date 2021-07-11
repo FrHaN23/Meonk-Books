@@ -158,7 +158,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
                   if (currentRoute != '/') {
                     Navigator.pop(context);
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Main()));
+                        MaterialPageRoute(builder: (context) => MyApp()));
                   } else {
                     Navigator.pop(context);
                   }
@@ -237,7 +237,7 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
       openCloseDial: isDialOpen,
       activeIcon: Icons.remove,
       backgroundColor:
-          global.isDarkModeEnabled ? Colors.black : Colors.amber[500],
+          global.isDarkModeEnabled ? Colors.blue : Colors.amber[500],
       foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
       renderOverlay: false,
       overlayOpacity: 0,
