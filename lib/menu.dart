@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:buku_meonk/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/info.dart';
@@ -47,7 +48,6 @@ class MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-
     print(_width);
     return Scaffold(
         body: SafeArea(
@@ -108,13 +108,14 @@ class MainMenuState extends State<MainMenu> {
                             child: Padding(
                                 padding: EdgeInsets.all(12),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
                                       book.title,
                                       style: TextStyle(
-                                          fontSize: _width < 500 ? 16 : 18,
+                                          fontSize: _width < 400 ? 16 : 18,
                                           fontWeight: FontWeight.bold,
                                           color: global.isDarkModeEnabled
                                               ? Colors.white
@@ -181,22 +182,18 @@ class MainMenuState extends State<MainMenu> {
                                     ),
                                     Text(
                                       book.description,
-                                      maxLines: _width < 400
-                                          ? 8
-                                          : _width < 500
-                                              ? 5
-                                              : 7,
+                                      maxLines: _width < 500 ? 8 : 7,
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.justify,
                                       style: TextStyle(
                                         color: global.isDarkModeEnabled
                                             ? Colors.white
                                             : null,
-                                        fontSize: _width < 600
-                                            ? 15
-                                            : _width < 700
-                                                ? 16
-                                                : 17,
+                                        fontSize: _width < 400
+                                            ? 12
+                                            : _width < 500
+                                                ? 14
+                                                : 16,
                                       ),
                                     ),
 

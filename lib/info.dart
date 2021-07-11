@@ -239,7 +239,11 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                             book.description,
                             textAlign: TextAlign.justify,
                             style: TextStyle(
-                              fontSize: _width < 500 ? 12 : 16,
+                              fontSize: _width < 400
+                                  ? 12
+                                  : _width < 600
+                                      ? 14
+                                      : 16,
                               color: global.isDarkModeEnabled
                                   ? Colors.white
                                   : null,

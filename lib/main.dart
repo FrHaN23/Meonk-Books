@@ -16,12 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Meonk Books',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => Main(),
-        '/favorite': (context) => FavoriteScreen()
-      },
+      routes: {'/favorite': (context) => FavoriteScreen()},
       theme: ThemeData(),
+      home: Main(),
     );
   }
 }
@@ -121,73 +118,89 @@ class DrawerDesign extends StatefulWidget {
 class _DrawerDesignState extends State<DrawerDesign> {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    String? currentRoute = ModalRoute.of(context)?.settings.name;
+    print(currentRoute);
+    return SafeArea(
+      child: Drawer(
         child: Container(
-      color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[100],
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          Container(
-            height: 120,
-            child: Image.asset(
-              'images/cat4.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.menu_book,
-              color: global.isDarkModeEnabled ? Colors.white : null,
-            ),
-            title: Text(
-              'Beranda',
-              style: TextStyle(
-                  color: global.isDarkModeEnabled ? Colors.white : null),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/');
-            },
-          ),
-          ListTile(
-              leading: Icon(
-                Icons.favorite_outline_rounded,
-                color: global.isDarkModeEnabled ? Colors.white : null,
+          color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[100],
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              Container(
+                height: 120,
+                child: Image.asset(
+                  'images/cat4.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
-              title: Text(
-                'Favorite',
-                style: TextStyle(
-                    color: global.isDarkModeEnabled ? Colors.white : null),
+              SizedBox(
+                height: 10,
               ),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/favorite');
-              }),
-          ListTile(
-            leading: Icon(
-              Icons.coffee_sharp,
-              color: global.isDarkModeEnabled ? Colors.white : null,
-            ),
-            title: Text(
-              'Saweria',
-              style: TextStyle(
-                  color: global.isDarkModeEnabled ? Colors.white : null),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return FavoriteScreen();
+              ListTile(
+                leading: Icon(
+                  Icons.menu_book,
+                  color: global.isDarkModeEnabled ? Colors.white : null,
+                ),
+                title: Text(
+                  'Beranda',
+                  style: TextStyle(
+                      color: global.isDarkModeEnabled ? Colors.white : null),
+                ),
+                onTap: () {
+                  if (currentRoute != '/') {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/');
+                  } else {
+                    Navigator.pop(context);
+                  }
                 },
-              ));
-            },
+              ),
+              ListTile(
+                  leading: Icon(
+                    Icons.favorite_outline_rounded,
+                    color: global.isDarkModeEnabled ? Colors.white : null,
+                  ),
+                  title: Text(
+                    'Favorite',
+                    style: TextStyle(
+                        color: global.isDarkModeEnabled ? Colors.white : null),
+                  ),
+                  onTap: () {
+                    if (currentRoute != '/favorite') {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/favorite');
+                    } else {
+                      Navigator.pop(context);
+                    }
+                  }),
+              ListTile(
+                leading: Icon(
+                  Icons.coffee_sharp,
+                  color: global.isDarkModeEnabled ? Colors.white : null,
+                ),
+                title: Text(
+                  'Saweria',
+                  style: TextStyle(
+                      color: global.isDarkModeEnabled ? Colors.white : null),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return FavoriteScreen();
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
-    ));
+    );
   }
 }
 
@@ -270,6 +283,32 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
           labelStyle: TextStyle(fontSize: 18.0),
           onTap: () => print('THIRD CHILD'),
           onLongPress: () => print('THIRD CHILD LONG PRESS'),
+        ),
+      ],
+    );
+  }
+}
+
+class SearchBar extends StatefulWidget {
+  @override
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController editingController = TextEditingController();
+    return Column(
+      children: [
+        Expanded(
+          child: TextField(
+            controller: editingController,
+            decoration: InputDecoration(
+                hintText: "Search",
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+          ),
         ),
       ],
     );
