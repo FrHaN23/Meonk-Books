@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:buku_meonk/main.dart';
 import 'package:flutter/material.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/info.dart';
@@ -41,6 +42,7 @@ class MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
+
     print(_width);
     return Scaffold(
         body: SafeArea(
@@ -52,12 +54,6 @@ class MainMenuState extends State<MainMenu> {
             itemCount: booksList.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              // booksList.sort((a, b) {
-              //   return b.title
-              //       .toString()
-              //       .toLowerCase()
-              //       .compareTo(a.title.toString().toLowerCase());
-              // });
               final Book book = booksList[index];
               var isMarked = favoriteBookList.contains(book);
 
@@ -170,30 +166,35 @@ class MainMenuState extends State<MainMenu> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    Text(
-                                      book.description,
-                                      maxLines: _width < 400
-                                          ? 8
-                                          : _width < 500
-                                              ? 5
-                                              : 7,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: global.isDarkModeEnabled
-                                            ? Colors.white
-                                            : null,
-                                        fontSize: _width < 600
-                                            ? 15
-                                            : _width < 700
-                                                ? 16
-                                                : 17,
+                                    Container(
+                                      width: 300,
+                                      child: Text(
+                                        book.description,
+                                        maxLines: _width < 400
+                                            ? 8
+                                            : _width < 500
+                                                ? 5
+                                                : 7,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: global.isDarkModeEnabled
+                                              ? Colors.white
+                                              : null,
+                                          fontSize: _width < 600
+                                              ? 15
+                                              : _width < 700
+                                                  ? 16
+                                                  : 17,
+                                        ),
                                       ),
                                     ),
+
                                     //Text(
                                     //    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
                                   ],
                                 ))),
                         Container(
+                          height: 1,
                           child: IconButton(
                             onPressed: () {
                               setState(() {
@@ -258,12 +259,6 @@ class MainMenuGridState extends State<MainMenuGrid> {
                             : 5,
             children: booksList.map(
               (book) {
-                booksList.sort((a, b) {
-                  return a.title
-                      .toString()
-                      .toLowerCase()
-                      .compareTo(b.title.toString().toLowerCase());
-                });
                 var isMarked = favoriteBookList.contains(book);
                 return InkWell(
                   onDoubleTap: () {
@@ -272,6 +267,17 @@ class MainMenuGridState extends State<MainMenuGrid> {
                         favoriteBookList.remove(book);
                       } else {
                         favoriteBookList.add(book);
+                        final snackBar = SnackBar(
+                          content: Text('Added to favorite'),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              favoriteBookList.remove(book);
+                              runApp(MyApp());
+                            },
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     });
                   },
