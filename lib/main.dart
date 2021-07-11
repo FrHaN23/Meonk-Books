@@ -31,6 +31,7 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //double _width = MediaQuery.of(context).size.width;
+    ValueNotifier<bool> isDialOpen = ValueNotifier(false);
     return Scaffold(
       appBar: AppBarDesign(
         titleAppBar: "Meonk Book",
@@ -38,13 +39,16 @@ class Main extends StatelessWidget {
       drawer: DrawerDesign(),
       floatingActionButton: SpeedDialDesign(
         listItem: booksList,
+        isDialOpen: isDialOpen,
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           if (constraints.maxWidth > 650 || global.isGridModeEnabled) {
             return MainMenuGrid();
           }
-          return MainMenu();
+          return MainMenu(
+            isDialOpen: isDialOpen,
+          );
         },
       ),
     );
@@ -189,20 +193,23 @@ class _DrawerDesignState extends State<DrawerDesign> {
 
 // ignore: must_be_immutable
 class SpeedDialDesign extends StatefulWidget {
-  SpeedDialDesign({required this.listItem});
+  SpeedDialDesign({required this.listItem, required this.isDialOpen});
+  var isDialOpen;
   List<dynamic> listItem;
   @override
   _SpeedDialDesignState createState() =>
-      _SpeedDialDesignState(listItem: listItem);
+      _SpeedDialDesignState(listItem: listItem, isDialOpen: isDialOpen);
 }
 
 class _SpeedDialDesignState extends State<SpeedDialDesign> {
-  _SpeedDialDesignState({required this.listItem});
+  _SpeedDialDesignState({required this.listItem, required this.isDialOpen});
+  var isDialOpen;
   List<dynamic> listItem;
   @override
   Widget build(BuildContext context) {
     return SpeedDial(
       animatedIcon: AnimatedIcons.menu_close,
+      openCloseDial: isDialOpen,
       icon: Icons.keyboard_control,
       activeIcon: Icons.remove,
       overlayColor: Colors.white,

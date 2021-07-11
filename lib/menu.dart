@@ -8,13 +8,18 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buku_meonk/global.dart' as global;
 
+// ignore: must_be_immutable
 class MainMenu extends StatefulWidget {
+  MainMenu({required this.isDialOpen});
+  var isDialOpen;
   @override
-  MainMenuState createState() => MainMenuState();
+  MainMenuState createState() => MainMenuState(isDialOpen: isDialOpen);
 }
 
 class MainMenuState extends State<MainMenu> {
   // final ScrollController _scrollController = ScrollController();
+  MainMenuState({required this.isDialOpen});
+  var isDialOpen;
   @override
   // void initState() {
   //   _scrollController.addListener(scrolled);
@@ -46,6 +51,14 @@ class MainMenuState extends State<MainMenu> {
     print(_width);
     return Scaffold(
         body: SafeArea(
+            child: WillPopScope(
+      onWillPop: () async {
+        if (isDialOpen.value) {
+          isDialOpen.value = false;
+          return false;
+        }
+        return true;
+      },
       child: Container(
           color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
           child: ListView.builder(
@@ -223,7 +236,7 @@ class MainMenuState extends State<MainMenu> {
               );
             },
           )),
-    ));
+    )));
   }
 }
 

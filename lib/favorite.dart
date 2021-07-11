@@ -9,35 +9,50 @@ import 'package:buku_meonk/main.dart';
 class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ValueNotifier<bool> isDialOpen = ValueNotifier(false);
     return Scaffold(
       backgroundColor:
-          global.isDarkModeEnabled ? Colors.black54 : Colors.amber[50],
+          global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
       appBar: AppBarDesign(
         titleAppBar: "Favorite",
       ),
       drawer: DrawerDesign(),
       floatingActionButton: SpeedDialDesign(
         listItem: favoriteBookList,
+        isDialOpen: isDialOpen,
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           if (constraints.maxWidth > 650 || global.isGridModeEnabled) {
             return FavoriteGrid();
           }
-          return FavoriteScreenMobile();
+          return FavoriteScreenMobile(
+            isDialOpen: isDialOpen,
+          );
         },
       ),
     );
   }
 }
 
+// ignore: must_be_immutable
 class FavoriteScreenMobile extends StatelessWidget {
+  FavoriteScreenMobile({required this.isDialOpen});
+  var isDialOpen;
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return SafeArea(
+        child: WillPopScope(
+      onWillPop: () async {
+        if (isDialOpen.value) {
+          isDialOpen.value = false;
+          return false;
+        }
+        return true;
+      },
       child: Container(
-          color: global.isDarkModeEnabled ? Colors.black54 : Colors.amber[50],
+          color: global.isDarkModeEnabled ? null : Colors.amber[50],
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             itemCount: favoriteBookList.length,
@@ -178,7 +193,7 @@ class FavoriteScreenMobile extends StatelessWidget {
               );
             },
           )),
-    );
+    ));
   }
 }
 
