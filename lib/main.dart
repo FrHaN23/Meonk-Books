@@ -68,7 +68,8 @@ class _AppBarDesignState extends State<AppBarDesign> {
   final String titleAppBar;
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return SafeArea(
+        child: AppBar(
       brightness: global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
       title: Text(
         titleAppBar,
@@ -81,8 +82,12 @@ class _AppBarDesignState extends State<AppBarDesign> {
       foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
       iconTheme: IconThemeData(
           color: global.isDarkModeEnabled ? Colors.white : Colors.black),
-      actions: [ChangeToGridButton()],
-    );
+      actions: <Widget>[
+        MediaQuery.of(context).size.width < 650
+            ? ChangeToGridButton()
+            : Container()
+      ],
+    ));
   }
 }
 

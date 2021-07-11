@@ -6,7 +6,6 @@ import 'package:buku_meonk/global.dart' as global;
 import 'package:buku_meonk/info.dart';
 import 'package:buku_meonk/main.dart';
 
-// ignore: must_be_immutable
 class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,9 +21,9 @@ class FavoriteScreen extends StatelessWidget {
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          // if (constraints.maxWidth > 650 || global.isGridModeEnabled) {
-          //   return MainMenuGrid();
-          // }
+          if (constraints.maxWidth > 650 || global.isGridModeEnabled) {
+            return FavoriteGrid();
+          }
           return FavoriteScreenMobile();
         },
       ),
@@ -32,7 +31,6 @@ class FavoriteScreen extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class FavoriteScreenMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -180,6 +178,102 @@ class FavoriteScreenMobile extends StatelessWidget {
               );
             },
           )),
+    );
+  }
+}
+
+class FavoriteGrid extends StatefulWidget {
+  @override
+  FavoriteGridState createState() => FavoriteGridState();
+}
+
+class FavoriteGridState extends State<FavoriteGrid> {
+  @override
+  Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
+    print(_width.toString());
+    return Scrollbar(
+      child: Container(
+        color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: GridView.count(
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: _width < 700
+                ? 1
+                : _width < 1100
+                    ? 2
+                    : _width < 1300
+                        ? 3
+                        : _width < 1600
+                            ? 4
+                            : 5,
+            children: favoriteBookList.map(
+              (book) {
+                var isMarked = favoriteBookList.contains(book);
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return InfoScreen(book: book, isMarked: isMarked);
+                    }));
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Image.network(
+                                book.bookThumbnail,
+                                width: 300,
+                                height: 300,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: Container(
+                            color: isMarked ? null : null,
+                          ))
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 300,
+                            margin: EdgeInsets.only(bottom: 10),
+                            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                            color: Colors.black.withOpacity(0.7),
+                            child: Text(
+                              book.title,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              },
+            ).toList(),
+          ),
+        ),
+      ),
     );
   }
 }
