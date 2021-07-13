@@ -259,9 +259,9 @@ class MainMenuGridState extends State<MainMenuGrid> {
                 ? 2
                 : _width < 600
                     ? 2
-                    : _width < 700
+                    : _width < 900
                         ? 3
-                        : _width < 1600
+                        : _width < 1200
                             ? 4
                             : 5,
             children: booksList.map(
