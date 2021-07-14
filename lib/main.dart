@@ -89,7 +89,16 @@ class _AppBarDesignState extends State<AppBarDesign> {
         foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
         iconTheme: IconThemeData(
             color: global.isDarkModeEnabled ? Colors.white : Colors.black),
-        actions: <Widget>[
+        actions: [
+          // IconButton(
+          //     onPressed: () {
+          //       showSearch(
+          //           context: context,
+          //           delegate: SearchBar(
+          //             book: booksList,
+          //           ));
+          //     },
+          //     icon: Icon(Icons.search)),
           MediaQuery.of(context).size.width < 650
               ? ChangeToGridButton()
               : Container()
@@ -303,11 +312,15 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
 }
 
 class SearchBar extends StatefulWidget {
+  SearchBar({required this.book});
+  final List<Book> book;
   @override
-  _SearchBarState createState() => _SearchBarState();
+  _SearchBarState createState() => _SearchBarState(book: book);
 }
 
 class _SearchBarState extends State<SearchBar> {
+  _SearchBarState({required this.book});
+  final List<Book> book;
   @override
   Widget build(BuildContext context) {
     TextEditingController editingController = TextEditingController();
@@ -329,31 +342,31 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 // ignore: must_be_immutable
-class ExitPrompt extends StatefulWidget {
-  ExitPrompt({required this.child});
-  Widget child;
-  @override
-  _ExitPromptState createState() => _ExitPromptState(child: child);
-}
+// class ExitPrompt extends StatefulWidget {
+//   ExitPrompt({required this.child});
+//   Widget child;
+//   @override
+//   _ExitPromptState createState() => _ExitPromptState(child: child);
+// }
 
-class _ExitPromptState extends State<ExitPrompt> {
-  _ExitPromptState({required this.child});
-  DateTime? currentBackPressTime;
-  Widget child;
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(child: child, onWillPop: onWillPop);
-  }
+// class _ExitPromptState extends State<ExitPrompt> {
+//   _ExitPromptState({required this.child});
+//   DateTime? currentBackPressTime;
+//   Widget child;
+//   @override
+//   Widget build(BuildContext context) {
+//     return WillPopScope(child: child, onWillPop: onWillPop);
+//   }
 
-  Future<bool> onWillPop() {
-    DateTime now = DateTime.now();
-    if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
-      currentBackPressTime = now;
-      final snackBar = SnackBar(content: Text("Tap again to exit"));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      return Future.value(false);
-    }
-    return Future.value(true);
-  }
-}
+//   Future<bool> onWillPop() {
+//     DateTime now = DateTime.now();
+//     if (currentBackPressTime == null ||
+//         now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+//       currentBackPressTime = now;
+//       final snackBar = SnackBar(content: Text("Tap again to exit"));
+//       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+//       return Future.value(false);
+//     }
+//     return Future.value(true);
+//   }
+// }

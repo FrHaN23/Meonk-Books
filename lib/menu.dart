@@ -31,10 +31,10 @@ class MainMenuState extends State<MainMenu> {
   //   if (_scrollController.hasClients) {
   //     if (_scrollController.position.userScrollDirection ==
   //         ScrollDirection.reverse) {
-  //       //TODO
+  //
   //     } else if (_scrollController.position.userScrollDirection ==
   //         ScrollDirection.forward) {
-  //       //TODO
+  //
   //     }
   //   }
   // }
@@ -100,6 +100,13 @@ class MainMenuState extends State<MainMenu> {
                               book.bookThumbnail,
                               height: 250,
                               fit: BoxFit.cover,
+                              loadingBuilder: (context, child, progress) {
+                                return progress == null
+                                    ? child
+                                    : CircularProgressIndicator(
+                                        color: Colors.amber,
+                                      );
+                              },
                             ),
                           ),
                         ),

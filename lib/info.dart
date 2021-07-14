@@ -86,7 +86,9 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                       child: Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(book.bookCover),
+                                image: NetworkImage(
+                                  book.bookCover,
+                                ),
                                 fit: BoxFit.fill),
                           ),
                           width: _width,
@@ -107,9 +109,14 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                           padding:
                               EdgeInsets.only(top: _width > 1200 ? 100 : 55),
                           child: Center(
-                              child: Image.network(
-                            book.bookCover,
-                          )),
+                              child: Image.network(book.bookCover,
+                                  loadingBuilder: (context, child, progress) {
+                            return progress == null
+                                ? child
+                                : CircularProgressIndicator(
+                                    color: Colors.amber,
+                                  );
+                          })),
                         ),
                       ),
                     ),
@@ -233,7 +240,7 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                   children: [
                     Container(
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(15, 5, 30, 30),
+                        padding: EdgeInsets.fromLTRB(15, 5, 30, 10),
                         child: Center(
                           child: Text(
                             book.description,
@@ -254,6 +261,25 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                     ),
                   ],
                 ),
+                Container(
+                    height: 150,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Card(
+                          child: Text("data"),
+                        ),
+                        Card(
+                          child: Text("data"),
+                        ),
+                        Card(
+                          child: Text("data"),
+                        ),
+                        Card(
+                          child: Text("data"),
+                        ),
+                      ],
+                    ))
               ],
             ),
           ],
