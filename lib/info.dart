@@ -265,18 +265,24 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                     height: 150,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
                       children: [
                         Card(
-                          child: Text("data"),
+                          color: Colors.amber[400],
+                          child: Container(
+                            child: SizedBox(
+                              width: 250,
+                            ),
+                          ),
                         ),
                         Card(
-                          child: Text("data"),
+                          child: Image.asset('images/notFound.jpg'),
                         ),
                         Card(
-                          child: Text("data"),
+                          child: Image.asset('images/notFound.jpg'),
                         ),
                         Card(
-                          child: Text("data"),
+                          child: Image.asset('images/notFound.jpg'),
                         ),
                       ],
                     ))
