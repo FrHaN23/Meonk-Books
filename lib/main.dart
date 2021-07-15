@@ -194,28 +194,28 @@ class _DrawerDesignState extends State<DrawerDesign> {
                       Navigator.pop(context);
                     }
                   }),
-              ListTile(
-                leading: Icon(
-                  Icons.coffee_sharp,
-                  color: global.isDarkModeEnabled ? Colors.white : null,
-                ),
-                title: Text(
-                  'Saweria',
-                  style: TextStyle(
-                      color: global.isDarkModeEnabled ? Colors.white : null),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return FavoriteScreen();
-                      },
-                    ),
-                  );
-                },
-              ),
+              // ListTile(
+              //   leading: Icon(
+              //     Icons.coffee_sharp,
+              //     color: global.isDarkModeEnabled ? Colors.white : null,
+              //   ),
+              //   title: Text(
+              //     'Saweria',
+              //     style: TextStyle(
+              //         color: global.isDarkModeEnabled ? Colors.white : null),
+              //   ),
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) {
+              //           return FavoriteScreen();
+              //         },
+              //       ),
+              //     );
+              //   },
+              // ),
             ],
           ),
         ),

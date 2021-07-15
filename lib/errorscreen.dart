@@ -10,3 +10,10 @@ class ErrorScreen extends StatelessWidget {
     );
   }
 }
+
+class ImageNotfound extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset('/images/notFound.jpg');
+  }
+}
