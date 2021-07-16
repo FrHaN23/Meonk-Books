@@ -263,16 +263,56 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                 ),
                 Container(
                     height: 150,
+                    padding: EdgeInsets.only(left: 10, right: 10),
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       children: [
                         Card(
                           color: Colors.amber[400],
-                          child: Container(
-                            child: SizedBox(
-                              width: 250,
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(5),
+                                child: Text("PhotoProfie"),
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(5),
+                                    child: Text("Subject"),
+                                  ),
+                                  Column(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text("Star"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text("nameReviewer"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text("isi"),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                         Card(
