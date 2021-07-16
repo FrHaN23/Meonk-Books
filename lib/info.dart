@@ -262,67 +262,120 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                   ],
                 ),
                 Container(
-                    height: 150,
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    height: 260,
+                    padding: EdgeInsets.only(left: 5, right: 5, bottom: 10),
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       children: [
                         Card(
-                          color: Colors.amber[400],
+                          color: Colors.amber[200],
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                padding: EdgeInsets.all(5),
-                                child: Text("PhotoProfie"),
-                              ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.all(5),
-                                    child: Text("Subject"),
-                                  ),
-                                  Column(
+                                children: book.reviewer.map((reviewer) {
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
+                                      Column(
+                                        children: [
+                                          Container(
+                                            width: 90,
+                                            padding: EdgeInsets.all(10),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(20000),
+                                              child: Image.network(
+                                                  reviewer.photoProfile),
+                                            ),
+                                          ),
+                                          Container(
+                                            child: Text(reviewer.name),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 200,
+                                                padding: EdgeInsets.only(
+                                                    bottom: 10, top: 10),
+                                                child: Text(
+                                                  reviewer.subject,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Container(
+                                            child: AbsorbPointer(
+                                              child: RatingBar(
+                                                initialRating: reviewer.rating,
+                                                updateOnDrag: false,
+                                                tapOnlyMode: false,
+                                                itemSize: 20,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                ratingWidget: RatingWidget(
+                                                  full: Icon(
+                                                    Icons.star,
+                                                    color: Colors.orange,
+                                                  ),
+                                                  half: Icon(
+                                                    Icons.star_half,
+                                                    color: Colors.orange,
+                                                  ),
+                                                  empty: Icon(
+                                                      Icons.star_outline,
+                                                      color: Colors.orange),
+                                                ),
+                                                onRatingUpdate: (value) {},
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                       Container(
-                                        padding: EdgeInsets.all(5),
-                                        child: Text("Star"),
+                                        padding: EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        width: 200,
+                                        child: Text(
+                                          reviewer.description,
+                                          maxLines: 5,
+                                          textAlign: TextAlign.justify,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
                                     ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.all(5),
-                                        child: Text("nameReviewer"),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.all(5),
-                                        child: Text("isi"),
-                                      )
-                                    ],
-                                  )
-                                ],
+                                  );
+                                }).toList(),
                               ),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: book.reviewer.map((reviewer) {
+                                    return Column(
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [],
+                                        )
+                                      ],
+                                    );
+                                  }).toList()),
                             ],
                           ),
-                        ),
-                        Card(
-                          child: Image.asset('images/notFound.jpg'),
-                        ),
-                        Card(
-                          child: Image.asset('images/notFound.jpg'),
-                        ),
-                        Card(
-                          child: Image.asset('images/notFound.jpg'),
                         ),
                       ],
                     ))

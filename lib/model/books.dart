@@ -5,6 +5,7 @@ class Book {
   String description;
   String bookThumbnail;
   String bookCover;
+  List<Reviewer> reviewer;
 
   Book(
       {required this.title,
@@ -12,20 +13,46 @@ class Book {
       required this.rating,
       required this.description,
       required this.bookThumbnail,
-      required this.bookCover});
+      required this.bookCover,
+      required this.reviewer});
+}
+
+class Reviewer {
+  String photoProfile;
+  String subject;
+  double rating;
+  String name;
+  String description;
+
+  Reviewer(
+      {required this.photoProfile,
+      required this.subject,
+      required this.rating,
+      required this.name,
+      required this.description});
 }
 
 var booksList = [
   Book(
-      title: 'ULYSSES',
-      author: 'James Joyce',
-      rating: 4.87,
-      description:
-          'Written as an homage to Homer’s epic poem The Odyssey, Ulysses follows its hero, Leopold Bloom, through the streets of Dublin. Overflowing with puns, references to classical literature, and stream-of-consciousness writing, this is a complex, multilayered novel about one day in the life of an ordinary man. Initially banned in the United States but overturned by a legal challenge by Random House’s Bennett Cerf, Ulysses was called “a memorable catastrophe” (Virginia Woolf), “a book to which we are all indebted” (T. S. Eliot), and “the most faithful X-ray ever taken of the ordinary human consciousness” (Edmund Wilson). Joyce himself said, “There is not one single serious line in [Ulysses].',
-      bookThumbnail:
-          'https://s3-us-west-2.amazonaws.com/tabs.web.media/5/7/5767/5767-square-1536.jpg',
-      bookCover:
-          'https://upload.wikimedia.org/wikipedia/commons/a/ab/JoyceUlysses2.jpg'),
+    title: 'ULYSSES',
+    author: 'James Joyce',
+    rating: 4.87,
+    description:
+        'Written as an homage to Homer’s epic poem The Odyssey, Ulysses follows its hero, Leopold Bloom, through the streets of Dublin. Overflowing with puns, references to classical literature, and stream-of-consciousness writing, this is a complex, multilayered novel about one day in the life of an ordinary man. Initially banned in the United States but overturned by a legal challenge by Random House’s Bennett Cerf, Ulysses was called “a memorable catastrophe” (Virginia Woolf), “a book to which we are all indebted” (T. S. Eliot), and “the most faithful X-ray ever taken of the ordinary human consciousness” (Edmund Wilson). Joyce himself said, “There is not one single serious line in [Ulysses].',
+    bookThumbnail:
+        'https://s3-us-west-2.amazonaws.com/tabs.web.media/5/7/5767/5767-square-1536.jpg',
+    bookCover:
+        'https://upload.wikimedia.org/wikipedia/commons/a/ab/JoyceUlysses2.jpg',
+    reviewer: [
+      Reviewer(
+          photoProfile: "/images/reviewer1.jpg",
+          subject: "Bukunya Bikin nangis",
+          rating: 4.5,
+          name: "Markona",
+          description:
+              "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk.")
+    ],
+  ),
   Book(
       title: 'THE GREAT GATSBY',
       author: ' F. Scott Fitzgerald',
@@ -35,7 +62,8 @@ var booksList = [
       bookThumbnail:
           'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781471173936/the-great-gatsby-9781471173936_hr.jpg',
       bookCover:
-          'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781471173936/the-great-gatsby-9781471173936_hr.jpg'),
+          'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781471173936/the-great-gatsby-9781471173936_hr.jpg',
+      reviewer: []),
   Book(
       title: 'A PORTRAIT OF THE ARTIST AS A YOUNG MAN',
       author: 'James Joyce',
@@ -43,7 +71,8 @@ var booksList = [
       description:
           'Published in 1916, James Joyce’s semiautobiographical tale of his alter ego, Stephen Dedalus, is a coming-of-age story like no other. A bold, innovative experiment with both language and structure, the work has exerted a lasting influence on the contemporary novel; Alfred Kazin commented that “Joyce dissolved mechanism in literature as effectively as Einstein destroyed it in physics.” Reviewing the book in The New Republic, H. G. Wells wrote, “Like some of the best novels in the world it is the story of an education; it is by far the most living and convincing picture that exists of an Irish Catholic upbringing.”',
       bookThumbnail: 'http://ecx.images-amazon.com/images/I/51DY8lRXVjL.jpg',
-      bookCover: 'http://ecx.images-amazon.com/images/I/51DY8lRXVjL.jpg'),
+      bookCover: 'http://ecx.images-amazon.com/images/I/51DY8lRXVjL.jpg',
+      reviewer: []),
   Book(
       title: 'LOLITA',
       author: 'Vladimir Nabokov',
@@ -53,7 +82,8 @@ var booksList = [
       bookThumbnail:
           'https://upload.wikimedia.org/wikipedia/commons/5/57/Lolita_1955.JPG',
       bookCover:
-          'https://upload.wikimedia.org/wikipedia/commons/5/57/Lolita_1955.JPG'),
+          'https://upload.wikimedia.org/wikipedia/commons/5/57/Lolita_1955.JPG',
+      reviewer: []),
   Book(
       title: 'BRAVE NEW WORLD',
       author: 'Aldous Huxley',
@@ -63,7 +93,8 @@ var booksList = [
       bookThumbnail:
           'https://mir-s3-cdn-cf.behance.net/project_modules/1400/bfffaf13630039.562761884989f.jpg',
       bookCover:
-          'https://mir-s3-cdn-cf.behance.net/project_modules/1400/bfffaf13630039.562761884989f.jpg'),
+          'https://mir-s3-cdn-cf.behance.net/project_modules/1400/bfffaf13630039.562761884989f.jpg',
+      reviewer: []),
   Book(
       title: 'THE SOUND AND THE FURY',
       author: 'William Faulkner',
@@ -73,7 +104,8 @@ var booksList = [
       bookThumbnail:
           'https://images.squarespace-cdn.com/content/507dba43c4aabcfd2216a447/1411579895420-PTVEL4CROZAICWNFFOB7/First+edition+cover+of+The+Sound+and+the+Fury?content-type=image%2Fjpeg',
       bookCover:
-          'https://media4.popsugar-assets.com/files/2014/09/22/068/n/1922283/599df3ff477307c7_sound_and_the_fury/i/Sound-Fury-William-Faulkner.jpg'),
+          'https://media4.popsugar-assets.com/files/2014/09/22/068/n/1922283/599df3ff477307c7_sound_and_the_fury/i/Sound-Fury-William-Faulkner.jpg',
+      reviewer: []),
   Book(
       title: 'CATCH-22',
       author: 'Joseph Heller',
@@ -83,7 +115,8 @@ var booksList = [
       bookThumbnail:
           'https://mir-s3-cdn-cf.behance.net/project_modules/disp/452ff49083859.560c8304b8a63.png',
       bookCover:
-          'https://mir-s3-cdn-cf.behance.net/project_modules/disp/452ff49083859.560c8304b8a63.png'),
+          'https://mir-s3-cdn-cf.behance.net/project_modules/disp/452ff49083859.560c8304b8a63.png',
+      reviewer: []),
 ];
 
 var favoriteBookList = [];
