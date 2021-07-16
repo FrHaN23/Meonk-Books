@@ -50,7 +50,14 @@ var booksList = [
           rating: 4.5,
           name: "Markona",
           description:
-              "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk.")
+              "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk."),
+      Reviewer(
+          photoProfile: "/images/reviewer2.jpg",
+          subject: "Cukup menarik jika dibaca berdiri",
+          rating: 4.4,
+          name: "Ujang",
+          description:
+              "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa")
     ],
   ),
   Book(
