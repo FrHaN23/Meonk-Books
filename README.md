@@ -1,6 +1,7 @@
-# buku_meonk
+# Buku_Meonk
 
-A new Flutter project.
+Buku Meonk (Meonk Book) is an app that list your book, your favorite book and also review from other people.
+right now all the data is dummy, you can find it at /lib/model/books.dart 
 
 ## Getting Started
 
