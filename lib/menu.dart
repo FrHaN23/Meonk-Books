@@ -332,8 +332,10 @@ class MainMenuGridState extends State<MainMenuGrid> {
                                   loadingBuilder: (context, child, progress) {
                                     return progress == null
                                         ? child
-                                        : CircularProgressIndicator(
-                                            color: Colors.amber,
+                                        : Center(
+                                            child: CircularProgressIndicator(
+                                              color: Colors.amber,
+                                            ),
                                           );
                                   },
                                   fit: BoxFit.cover,

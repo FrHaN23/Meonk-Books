@@ -6,6 +6,7 @@ import 'package:buku_meonk/menu.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/favorite.dart';
 import 'package:buku_meonk/global.dart' as global;
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,6 +30,7 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     //double _width = MediaQuery.of(context).size.width;
     ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+    global.getIsdark();
     return Scaffold(
       backgroundColor:
           global.isDarkModeEnabled ? Colors.black : Colors.amber[50],
@@ -264,6 +266,7 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
           labelStyle: TextStyle(fontSize: 18.0),
           onTap: () => setState(() {
             global.isDarkModeEnabled = !global.isDarkModeEnabled;
+            addIsDark(global.isDarkModeEnabled);
             runApp(MyApp());
           }),
         ),
@@ -308,6 +311,17 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
         ),
       ],
     );
+  }
+
+  addIsDark(isDark) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("isDark", global.isDarkModeEnabled);
+  }
+
+  getIsdark() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    global.isDarkModeEnabled = prefs.getBool("isDark") ?? false;
+    return global.isDarkModeEnabled;
   }
 }
 
