@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:buku_meonk/main.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,10 @@ class InfoScreenState extends State<InfoScreen> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext contex, BoxConstraints constrains) {
-      return InfoScreenMobile(book: book, isMarked: isMarked);
+      if (constrains.maxWidth < 830) {
+        return InfoScreenMobile(book: book, isMarked: isMarked);
+      }
+      return InfoScreenWeb(book: book);
     });
   }
 }
@@ -380,7 +384,7 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
   }
 }
 
-//Web Version//
+//wide Version//
 class InfoScreenWeb extends StatefulWidget {
   final Book book;
   InfoScreenWeb({required this.book});
@@ -388,88 +392,106 @@ class InfoScreenWeb extends StatefulWidget {
   InfoScreenWebState createState() => InfoScreenWebState(book: book);
 }
 
-//web Version//
+//wide Version//
 class InfoScreenWebState extends State<InfoScreenWeb> {
   final Book book;
   InfoScreenWebState({required this.book});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          book.title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color: global.isDarkModeEnabled ? Colors.white : Colors.black,
+              fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        bottom: PreferredSize(
+          child: Container(
+            margin: EdgeInsets.only(bottom: 3),
+            child: Text(book.author),
+          ),
+          preferredSize: Size(0, -10),
+        ),
+        backgroundColor:
+            global.isDarkModeEnabled ? Colors.black12 : Colors.amber[300],
+        foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
+        iconTheme: IconThemeData(
+          color: global.isDarkModeEnabled ? Colors.white : Colors.black,
+        ),
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        child: Center(
+          child: Container(
+            width: 1200,
+            padding: EdgeInsets.only(top: 20, left: 15),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(10, 10, 15, 10),
-                      child: Container(
-                          width: 260,
-                          child: Image.network(
-                            book.bookCover,
-                            fit: BoxFit.cover,
-                          )),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Center(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              child: Text(
-                                book.title,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 19,
-                                ),
-                              ),
-                            ),
-                            Row(
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(10, 10, 15, 10),
+                          child: Container(
+                              width: 370,
+                              child: Image.network(
+                                book.bookCover,
+                                fit: BoxFit.cover,
+                              )),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Center(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  child: Text(
-                                    book.author,
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: 16),
-                                  ),
+                                  padding: EdgeInsets.fromLTRB(10, 15, 50, 10),
+                                  child: Card(
+                                      child: Container(
+                                    padding: EdgeInsets.all(15),
+                                    child: Text(
+                                      book.description,
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  )),
                                 ),
                               ],
-                            )
-                          ],
-                        )),
-                      ),
+                            )),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+                // Row(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       Expanded(
+                //         child: Container(
+                //           padding: EdgeInsets.fromLTRB(25, 0, 50, 10),
+                //           child: Text(
+                //             book.description,
+                //             textAlign: TextAlign.justify,
+                //             style: TextStyle(fontSize: 18),
+                //           ),
+                //         ),
+                //       ),
+                //     ])
               ],
             ),
-            Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(25, 0, 50, 10),
-                      child: Text(
-                        book.description,
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ),
-                ])
-          ],
+          ),
         ),
       ),
     );
