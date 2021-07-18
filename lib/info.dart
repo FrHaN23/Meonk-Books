@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:buku_meonk/main.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
@@ -399,6 +398,8 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          global.isDarkModeEnabled ? Colors.black87 : Colors.amber[300],
       appBar: AppBar(
         title: Text(
           book.title,
@@ -411,12 +412,17 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
         bottom: PreferredSize(
           child: Container(
             margin: EdgeInsets.only(bottom: 3),
-            child: Text(book.author),
+            child: Text(
+              book.author,
+              style: TextStyle(
+                  color:
+                      global.isDarkModeEnabled ? Colors.white : Colors.black),
+            ),
           ),
           preferredSize: Size(0, -10),
         ),
         backgroundColor:
-            global.isDarkModeEnabled ? Colors.black12 : Colors.amber[300],
+            global.isDarkModeEnabled ? Colors.black : Colors.amber[300],
         foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
         iconTheme: IconThemeData(
           color: global.isDarkModeEnabled ? Colors.white : Colors.black,
@@ -458,14 +464,21 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
                                 Container(
                                   padding: EdgeInsets.fromLTRB(10, 15, 50, 10),
                                   child: Card(
+                                      color: global.isDarkModeEnabled
+                                          ? Colors.black26
+                                          : Colors.amber[300],
                                       child: Container(
-                                    padding: EdgeInsets.all(15),
-                                    child: Text(
-                                      book.description,
-                                      textAlign: TextAlign.justify,
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                  )),
+                                        padding: EdgeInsets.all(15),
+                                        child: Text(
+                                          book.description,
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: global.isDarkModeEnabled
+                                                  ? Colors.white
+                                                  : Colors.black),
+                                        ),
+                                      )),
                                 ),
                               ],
                             )),
