@@ -57,6 +57,13 @@ var booksList = [
           rating: 4.4,
           name: "Ujang",
           description:
+              "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+      Reviewer(
+          photoProfile: "/images/reviewer3.jpg",
+          subject: "Dekat dengan hati",
+          rating: 3.6,
+          name: "Inem",
+          description:
               "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa")
     ],
   ),
