@@ -53,7 +53,7 @@ var booksList = [
               "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk."),
       Reviewer(
           photoProfile: "/images/reviewer2.jpg",
-          subject: "Cukup menarik jika dibaca berdiri",
+          subject: "Cukup menarik",
           rating: 4.4,
           name: "Ujang",
           description:
@@ -67,7 +67,7 @@ var booksList = [
               "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
       Reviewer(
           photoProfile: "/images/reviewer4.jpg",
-          subject: "Dekat dengan hati",
+          subject: "Lorem Ipsum",
           rating: 3.5,
           name: "Khoceng Oren",
           description:
@@ -91,7 +91,43 @@ var booksList = [
           'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781471173936/the-great-gatsby-9781471173936_hr.jpg',
       bookCover:
           'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781471173936/the-great-gatsby-9781471173936_hr.jpg',
-      reviewer: []),
+      reviewer: [
+        Reviewer(
+            photoProfile: "/images/reviewer1.jpg",
+            subject: "Bukunya Bikin nangis",
+            rating: 4.5,
+            name: "Markona",
+            description:
+                "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk."),
+        Reviewer(
+            photoProfile: "/images/reviewer2.jpg",
+            subject: "Cukup menarik",
+            rating: 4.4,
+            name: "Ujang",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer3.jpg",
+            subject: "Dekat dengan hati",
+            rating: 4,
+            name: "Inem",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer4.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Khoceng Oren",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+        Reviewer(
+            photoProfile: "/images/reviewer5.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Pak Budi",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      ]),
   Book(
       title: 'A PORTRAIT OF THE ARTIST AS A YOUNG MAN',
       author: 'James Joyce',
@@ -100,7 +136,43 @@ var booksList = [
           'Published in 1916, James Joyce’s semiautobiographical tale of his alter ego, Stephen Dedalus, is a coming-of-age story like no other. A bold, innovative experiment with both language and structure, the work has exerted a lasting influence on the contemporary novel; Alfred Kazin commented that “Joyce dissolved mechanism in literature as effectively as Einstein destroyed it in physics.” Reviewing the book in The New Republic, H. G. Wells wrote, “Like some of the best novels in the world it is the story of an education; it is by far the most living and convincing picture that exists of an Irish Catholic upbringing.”',
       bookThumbnail: 'http://ecx.images-amazon.com/images/I/51DY8lRXVjL.jpg',
       bookCover: 'http://ecx.images-amazon.com/images/I/51DY8lRXVjL.jpg',
-      reviewer: []),
+      reviewer: [
+        Reviewer(
+            photoProfile: "/images/reviewer1.jpg",
+            subject: "Bukunya Bikin nangis",
+            rating: 4.5,
+            name: "Markona",
+            description:
+                "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk."),
+        Reviewer(
+            photoProfile: "/images/reviewer2.jpg",
+            subject: "Cukup menarik",
+            rating: 4.4,
+            name: "Ujang",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer3.jpg",
+            subject: "Dekat dengan hati",
+            rating: 4,
+            name: "Inem",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer4.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Khoceng Oren",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+        Reviewer(
+            photoProfile: "/images/reviewer5.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Pak Budi",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      ]),
   Book(
       title: 'LOLITA',
       author: 'Vladimir Nabokov',
@@ -111,7 +183,43 @@ var booksList = [
           'https://upload.wikimedia.org/wikipedia/commons/5/57/Lolita_1955.JPG',
       bookCover:
           'https://upload.wikimedia.org/wikipedia/commons/5/57/Lolita_1955.JPG',
-      reviewer: []),
+      reviewer: [
+        Reviewer(
+            photoProfile: "/images/reviewer1.jpg",
+            subject: "Bukunya Bikin nangis",
+            rating: 4.5,
+            name: "Markona",
+            description:
+                "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk."),
+        Reviewer(
+            photoProfile: "/images/reviewer2.jpg",
+            subject: "Cukup menarik",
+            rating: 4.4,
+            name: "Ujang",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer3.jpg",
+            subject: "Dekat dengan hati",
+            rating: 4,
+            name: "Inem",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer4.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Khoceng Oren",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+        Reviewer(
+            photoProfile: "/images/reviewer5.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Pak Budi",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      ]),
   Book(
       title: 'BRAVE NEW WORLD',
       author: 'Aldous Huxley',
@@ -122,7 +230,43 @@ var booksList = [
           'https://mir-s3-cdn-cf.behance.net/project_modules/1400/bfffaf13630039.562761884989f.jpg',
       bookCover:
           'https://mir-s3-cdn-cf.behance.net/project_modules/1400/bfffaf13630039.562761884989f.jpg',
-      reviewer: []),
+      reviewer: [
+        Reviewer(
+            photoProfile: "/images/reviewer1.jpg",
+            subject: "Bukunya Bikin nangis",
+            rating: 4.5,
+            name: "Markona",
+            description:
+                "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk."),
+        Reviewer(
+            photoProfile: "/images/reviewer2.jpg",
+            subject: "Cukup menarik",
+            rating: 4.4,
+            name: "Ujang",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer3.jpg",
+            subject: "Dekat dengan hati",
+            rating: 4,
+            name: "Inem",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer4.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Khoceng Oren",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+        Reviewer(
+            photoProfile: "/images/reviewer5.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Pak Budi",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      ]),
   Book(
       title: 'THE SOUND AND THE FURY',
       author: 'William Faulkner',
@@ -133,7 +277,43 @@ var booksList = [
           'https://images.squarespace-cdn.com/content/507dba43c4aabcfd2216a447/1411579895420-PTVEL4CROZAICWNFFOB7/First+edition+cover+of+The+Sound+and+the+Fury?content-type=image%2Fjpeg',
       bookCover:
           'https://media4.popsugar-assets.com/files/2014/09/22/068/n/1922283/599df3ff477307c7_sound_and_the_fury/i/Sound-Fury-William-Faulkner.jpg',
-      reviewer: []),
+      reviewer: [
+        Reviewer(
+            photoProfile: "/images/reviewer1.jpg",
+            subject: "Bukunya Bikin nangis",
+            rating: 4.5,
+            name: "Markona",
+            description:
+                "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk."),
+        Reviewer(
+            photoProfile: "/images/reviewer2.jpg",
+            subject: "Cukup menarik",
+            rating: 4.4,
+            name: "Ujang",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer3.jpg",
+            subject: "Dekat dengan hati",
+            rating: 4,
+            name: "Inem",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer4.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Khoceng Oren",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+        Reviewer(
+            photoProfile: "/images/reviewer5.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Pak Budi",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      ]),
   Book(
       title: 'CATCH-22',
       author: 'Joseph Heller',
@@ -144,7 +324,43 @@ var booksList = [
           'https://mir-s3-cdn-cf.behance.net/project_modules/disp/452ff49083859.560c8304b8a63.png',
       bookCover:
           'https://mir-s3-cdn-cf.behance.net/project_modules/disp/452ff49083859.560c8304b8a63.png',
-      reviewer: []),
+      reviewer: [
+        Reviewer(
+            photoProfile: "/images/reviewer1.jpg",
+            subject: "Bukunya Bikin nangis",
+            rating: 4.5,
+            name: "Markona",
+            description:
+                "Bukunya sangat rekomended buat yang lagi galau, kalau mau baca silakan baca di tempat yang gelap dan banyak nyamuk."),
+        Reviewer(
+            photoProfile: "/images/reviewer2.jpg",
+            subject: "Cukup menarik",
+            rating: 4.4,
+            name: "Ujang",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer3.jpg",
+            subject: "Dekat dengan hati",
+            rating: 4,
+            name: "Inem",
+            description:
+                "Buku menarik jika dipelajari lebih lanjut dan dibedah oleh para ahli bahasa"),
+        Reviewer(
+            photoProfile: "/images/reviewer4.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Khoceng Oren",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+        Reviewer(
+            photoProfile: "/images/reviewer5.jpg",
+            subject: "Lorem Ipsum",
+            rating: 3.5,
+            name: "Pak Budi",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      ]),
 ];
 
 var favoriteBookList = [];

@@ -477,6 +477,15 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
                             child: Image.network(
                               book.bookCover,
                               fit: BoxFit.cover,
+                              loadingBuilder: (context, child, progress) {
+                                return progress == null
+                                    ? child
+                                    : Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.amber,
+                                        ),
+                                      );
+                              },
                             ),
                           ),
                         ),
@@ -515,20 +524,169 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
                     ),
                   ],
                 ),
-                // Row(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Expanded(
-                //         child: Container(
-                //           padding: EdgeInsets.fromLTRB(25, 0, 50, 10),
-                //           child: Text(
-                //             book.description,
-                //             textAlign: TextAlign.justify,
-                //             style: TextStyle(fontSize: 18),
-                //           ),
-                //         ),
-                //       ),
-                //     ])
+                Row(children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 55, right: 10),
+                    alignment: Alignment.center,
+                    child: AbsorbPointer(
+                      child: RatingBar(
+                        initialRating: book.rating,
+                        updateOnDrag: false,
+                        tapOnlyMode: false,
+                        itemSize: 40,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        ratingWidget: RatingWidget(
+                            full: Icon(Icons.star, color: Colors.orange),
+                            half: Icon(
+                              Icons.star_half,
+                              color: Colors.orange,
+                            ),
+                            empty: Icon(
+                              Icons.star_outline,
+                              color: Colors.orange,
+                            )),
+                        onRatingUpdate: (value) {},
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 10),
+                    alignment: Alignment.center,
+                    child: Text(
+                      book.rating.toString(),
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: global.isDarkModeEnabled
+                              ? Colors.white
+                              : Colors.black),
+                    ),
+                  )
+                ]),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Divider(),
+                    Container(
+                      height: 250,
+                      padding: EdgeInsets.only(left: 5, right: 5, bottom: 10),
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        children: book.reviewer.map((reviewer) {
+                          return Wrap(
+                            children: [
+                              Card(
+                                color: global.isDarkModeEnabled
+                                    ? Colors.black12
+                                    : Colors.amber[200],
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              width: 90,
+                                              height: 100,
+                                              padding: EdgeInsets.all(5),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                child: Image.network(
+                                                    reviewer.photoProfile),
+                                              ),
+                                            ),
+                                            Container(
+                                                child: Text(
+                                              reviewer.name,
+                                              style: TextStyle(
+                                                  color:
+                                                      global.isDarkModeEnabled
+                                                          ? Colors.white
+                                                          : Colors.black),
+                                            )),
+                                            Container(
+                                              width: 200,
+                                              padding: EdgeInsets.only(
+                                                  bottom: 5, top: 5),
+                                              child: Text(
+                                                reviewer.subject,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color:
+                                                        global.isDarkModeEnabled
+                                                            ? Colors.white
+                                                            : Colors.black),
+                                              ),
+                                            ),
+                                            Container(
+                                              child: AbsorbPointer(
+                                                child: RatingBar(
+                                                  initialRating:
+                                                      reviewer.rating,
+                                                  updateOnDrag: false,
+                                                  tapOnlyMode: false,
+                                                  itemSize: 20,
+                                                  direction: Axis.horizontal,
+                                                  allowHalfRating: true,
+                                                  itemCount: 5,
+                                                  ratingWidget: RatingWidget(
+                                                    full: Icon(
+                                                      Icons.star,
+                                                      color: Colors.orange,
+                                                    ),
+                                                    half: Icon(
+                                                      Icons.star_half,
+                                                      color: Colors.orange,
+                                                    ),
+                                                    empty: Icon(
+                                                        Icons.star_outline,
+                                                        color: Colors.orange),
+                                                  ),
+                                                  onRatingUpdate: (value) {},
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.only(
+                                                  left: 10, right: 10),
+                                              width: 200,
+                                              height: 100,
+                                              child: Text(
+                                                reviewer.description,
+                                                maxLines: 4,
+                                                textAlign: TextAlign.justify,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    color:
+                                                        global.isDarkModeEnabled
+                                                            ? Colors.white
+                                                            : Colors.black),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
