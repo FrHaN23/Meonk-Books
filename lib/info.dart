@@ -24,7 +24,10 @@ class InfoScreenState extends State<InfoScreen> {
       if (constrains.maxWidth < 830) {
         return InfoScreenMobile(book: book, isMarked: isMarked);
       }
-      return InfoScreenWeb(book: book);
+      return InfoScreenWeb(
+        book: book,
+        isMarked: isMarked,
+      );
     });
   }
 }
@@ -64,7 +67,6 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                   favoriteBookList.remove(book);
                 } else {
                   favoriteBookList.add(book);
-                  print(favoriteBookList);
                 }
               });
             },
@@ -386,17 +388,21 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
 //wide Version//
 class InfoScreenWeb extends StatefulWidget {
   final Book book;
-  InfoScreenWeb({required this.book});
+  final bool isMarked;
+  InfoScreenWeb({required this.book, required this.isMarked});
   @override
-  InfoScreenWebState createState() => InfoScreenWebState(book: book);
+  InfoScreenWebState createState() =>
+      InfoScreenWebState(book: book, isMarked: isMarked);
 }
 
 //wide Version//
 class InfoScreenWebState extends State<InfoScreenWeb> {
   final Book book;
-  InfoScreenWebState({required this.book});
+  final bool isMarked;
+  InfoScreenWebState({required this.book, required this.isMarked});
   @override
   Widget build(BuildContext context) {
+    var isMarked = favoriteBookList.contains(book);
     return Scaffold(
       backgroundColor:
           global.isDarkModeEnabled ? Colors.black87 : Colors.amber[300],
@@ -408,6 +414,23 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
               color: global.isDarkModeEnabled ? Colors.white : Colors.black,
               fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                if (isMarked) {
+                  favoriteBookList.remove(book);
+                } else {
+                  favoriteBookList.add(book);
+                }
+              });
+            },
+            icon: Icon(
+              isMarked ? Icons.bookmark : Icons.bookmark_outline,
+              size: 32,
+            ),
+          ),
+        ],
         centerTitle: true,
         bottom: PreferredSize(
           child: Container(
@@ -447,11 +470,12 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(10, 10, 15, 10),
                           child: Container(
-                              width: 370,
-                              child: Image.network(
-                                book.bookCover,
-                                fit: BoxFit.cover,
-                              )),
+                            width: 370,
+                            child: Image.network(
+                              book.bookCover,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                         Expanded(
                           child: Padding(
