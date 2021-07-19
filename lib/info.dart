@@ -355,7 +355,7 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                                           height: 200,
                                           child: Text(
                                             reviewer.description,
-                                            maxLines: 5,
+                                            maxLines: 4,
                                             textAlign: TextAlign.justify,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
@@ -405,14 +405,17 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
     var isMarked = favoriteBookList.contains(book);
     return Scaffold(
       backgroundColor:
-          global.isDarkModeEnabled ? Colors.black87 : Colors.amber[300],
+          global.isDarkModeEnabled ? Colors.black87 : Colors.amber[100],
       appBar: AppBar(
-        title: Text(
-          book.title,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: global.isDarkModeEnabled ? Colors.white : Colors.black,
-              fontWeight: FontWeight.bold),
+        title: Container(
+          padding: EdgeInsets.only(top: 5),
+          child: Text(
+            book.title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: global.isDarkModeEnabled ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold),
+          ),
         ),
         actions: [
           IconButton(
@@ -427,7 +430,7 @@ class InfoScreenWebState extends State<InfoScreenWeb> {
             },
             icon: Icon(
               isMarked ? Icons.bookmark : Icons.bookmark_outline,
-              size: 32,
+              size: 25,
             ),
           ),
         ],

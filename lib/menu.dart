@@ -189,7 +189,7 @@ class MainMenuState extends State<MainMenu> {
                                     ),
                                     Text(
                                       book.description,
-                                      maxLines: _width < 500 ? 8 : 7,
+                                      maxLines: _width <= 500 ? 9 : 7,
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.justify,
                                       style: TextStyle(
@@ -198,8 +198,8 @@ class MainMenuState extends State<MainMenu> {
                                             : null,
                                         fontSize: _width < 400
                                             ? 12
-                                            : _width < 500
-                                                ? 14
+                                            : _width <= 500
+                                                ? 13.5
                                                 : 16,
                                       ),
                                     ),
