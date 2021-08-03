@@ -55,7 +55,7 @@ class _AppBarDesignState extends State<SearchBar> {
       style: TextStyle(
           color: global.isDarkModeEnabled ? Colors.white60 : Colors.black54,
           fontSize: 20),
-      // onChanged: (query)=>updateSearchQuery(query),
+      // onChanged: (query)=>updateSearchQuery(query)
     );
   }
 }
