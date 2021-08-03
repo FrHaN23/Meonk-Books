@@ -43,15 +43,15 @@ class FavoriteScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return SafeArea(
-        child: WillPopScope(
-      onWillPop: () async {
-        if (isDialOpen.value) {
-          isDialOpen.value = false;
-          return false;
-        }
-        return true;
-      },
-      child: Container(
+      child: WillPopScope(
+        onWillPop: () async {
+          if (isDialOpen.value) {
+            isDialOpen.value = false;
+            return false;
+          }
+          return true;
+        },
+        child: Container(
           color: global.isDarkModeEnabled ? null : Colors.amber[50],
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
@@ -62,12 +62,17 @@ class FavoriteScreenMobile extends StatelessWidget {
 
               return InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return InfoScreen(
-                      book: favorited,
-                      isMarked: false,
-                    );
-                  }));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return InfoScreen(
+                          book: favorited,
+                          isMarked: false,
+                        );
+                      },
+                    ),
+                  );
                 },
                 child: Card(
                   color: global.isDarkModeEnabled
@@ -192,8 +197,10 @@ class FavoriteScreenMobile extends StatelessWidget {
                 ),
               );
             },
-          )),
-    ));
+          ),
+        ),
+      ),
+    );
   }
 }
 

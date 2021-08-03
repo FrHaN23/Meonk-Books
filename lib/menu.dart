@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:buku_meonk/main.dart';
+import 'package:buku_meonk/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:buku_meonk/model/books.dart';
@@ -50,69 +51,66 @@ class MainMenuState extends State<MainMenu> {
     double _width = MediaQuery.of(context).size.width;
     print(_width);
     return Scaffold(
-        body: SafeArea(
-            child: WillPopScope(
-      onWillPop: () async {
-        if (isDialOpen.value) {
-          isDialOpen.value = false;
-          return false;
-        }
-        return true;
-      },
-      child: Container(
-          color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
-          child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            // controller: _scrollController,
-            itemCount: booksList.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              final Book book = booksList[index];
-              var isMarked = favoriteBookList.contains(book);
+      body: SafeArea(
+        child: WillPopScope(
+          onWillPop: () async {
+            if (isDialOpen.value) {
+              isDialOpen.value = false;
+              return false;
+            }
+            return true;
+          },
+          child: Container(
+              color:
+                  global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                // controller: _scrollController,
+                itemCount: booksList.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  final Book book = booksList[index];
+                  var isMarked = favoriteBookList.contains(book);
 
-              return InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return InfoScreen(
-                      book: book,
-                      isMarked: isMarked,
-                    );
-                  }));
-                },
-                child: Card(
-                  shadowColor: Colors.black,
-                  color: global.isDarkModeEnabled
-                      ? Colors.black87
-                      : Colors.amber[100],
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              book.bookThumbnail,
-                              height: 250,
-                              fit: BoxFit.cover,
-                              loadingBuilder: (context, child, progress) {
-                                return progress == null
-                                    ? child
-                                    : CircularProgressIndicator(
-                                        color: Colors.amber,
-                                      );
-                              },
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(goToInfoScreen(book, isMarked));
+                    },
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: global.isDarkModeEnabled
+                          ? Colors.black87
+                          : Colors.amber[100],
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(
+                              width: 5,
                             ),
-                          ),
-                        ),
-                        Expanded(
-                            flex: 4,
-                            child: Padding(
+                            Expanded(
+                              flex: 3,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  book.bookThumbnail,
+                                  height: 250,
+                                  fit: BoxFit.cover,
+                                  loadingBuilder: (context, child, progress) {
+                                    return progress == null
+                                        ? child
+                                        : CircularProgressIndicator(
+                                            color: Colors.amber,
+                                          );
+                                  },
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Padding(
                                 padding: EdgeInsets.all(12),
                                 child: Column(
                                   crossAxisAlignment:
@@ -207,40 +205,45 @@ class MainMenuState extends State<MainMenu> {
                                     //Text(
                                     //    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
                                   ],
-                                ))),
-                        Container(
-                          child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                if (isMarked) {
-                                  favoriteBookList.remove(book);
-                                } else {
-                                  favoriteBookList.add(book);
-                                }
-                              });
-                            },
-                            icon: Icon(
-                              isMarked
-                                  ? Icons.bookmark
-                                  : Icons.bookmark_outline,
-                              size: _width < 500
-                                  ? 30
-                                  : _width < 600
-                                      ? 35
-                                      : 40,
+                                ),
+                              ),
                             ),
-                            color:
-                                global.isDarkModeEnabled ? Colors.white : null,
-                          ),
+                            Container(
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    if (isMarked) {
+                                      favoriteBookList.remove(book);
+                                    } else {
+                                      favoriteBookList.add(book);
+                                    }
+                                  });
+                                },
+                                icon: Icon(
+                                  isMarked
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_outline,
+                                  size: _width < 500
+                                      ? 30
+                                      : _width < 600
+                                          ? 35
+                                          : 40,
+                                ),
+                                color: global.isDarkModeEnabled
+                                    ? Colors.white
+                                    : null,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              );
-            },
-          )),
-    )));
+                  );
+                },
+              )),
+        ),
+      ),
+    );
   }
 }
 
@@ -276,43 +279,49 @@ class MainMenuGridState extends State<MainMenuGrid> {
                 var isMarked = favoriteBookList.contains(book);
                 return InkWell(
                   onDoubleTap: () {
-                    setState(() {
-                      if (isMarked) {
-                        favoriteBookList.remove(book);
-                        final snackBar = SnackBar(
-                          content: Text('Removed from favorite'),
-                          duration: Duration(seconds: 1),
-                          action: SnackBarAction(
-                            label: 'Undo',
-                            onPressed: () {
-                              favoriteBookList.add(book);
-                              runApp(MyApp());
-                            },
-                          ),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      } else {
-                        favoriteBookList.add(book);
-                        final snackBar = SnackBar(
-                          content: Text('Added to favorite'),
-                          duration: Duration(seconds: 1),
-                          action: SnackBarAction(
-                            label: 'Undo',
-                            onPressed: () {
-                              favoriteBookList.remove(book);
-                              runApp(MyApp());
-                            },
-                          ),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    });
+                    setState(
+                      () {
+                        if (isMarked) {
+                          favoriteBookList.remove(book);
+                          final snackBar = SnackBar(
+                            content: Text('Removed from favorite'),
+                            duration: Duration(seconds: 1),
+                            action: SnackBarAction(
+                              label: 'Undo',
+                              onPressed: () {
+                                favoriteBookList.add(book);
+                                runApp(MyApp());
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else {
+                          favoriteBookList.add(book);
+                          final snackBar = SnackBar(
+                            content: Text('Added to favorite'),
+                            duration: Duration(seconds: 1),
+                            action: SnackBarAction(
+                              label: 'Undo',
+                              onPressed: () {
+                                favoriteBookList.remove(book);
+                                runApp(MyApp());
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                    );
                   },
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return InfoScreen(book: book, isMarked: isMarked);
-                    }));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return InfoScreen(book: book, isMarked: isMarked);
+                        },
+                      ),
+                    );
                   },
                   child: Stack(
                     alignment: Alignment.center,

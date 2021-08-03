@@ -1,3 +1,4 @@
+import 'package:buku_meonk/searchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Meonk Books',
       routes: {'/favorite': (context) => FavoriteScreen()},
       theme: ThemeData(),
@@ -24,7 +26,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,6 @@ class Main extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class AppBarDesign extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(55);
   AppBarDesign({required this.titleAppBar});
@@ -74,39 +74,44 @@ class _AppBarDesignState extends State<AppBarDesign> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: ClipRRect(
-      borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
-      child: AppBar(
-        brightness:
-            global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
-        title: Text(
-          titleAppBar,
-          style: TextStyle(
-            color: global.isDarkModeEnabled ? Colors.white : Colors.black,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+        child: AppBar(
+          brightness:
+              global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
+          title: Text(
+            titleAppBar,
+            style: TextStyle(
+              color: global.isDarkModeEnabled ? Colors.white : Colors.black,
+            ),
           ),
+          backgroundColor:
+              global.isDarkModeEnabled ? Colors.black26 : Colors.amber[300],
+          foregroundColor:
+              global.isDarkModeEnabled ? Colors.white : Colors.black,
+          iconTheme: IconThemeData(
+              color: global.isDarkModeEnabled ? Colors.white : Colors.black),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SearchScreenMain();
+                      },
+                    ),
+                  );
+                },
+                icon: Icon(Icons.search)),
+            MediaQuery.of(context).size.width < 650
+                ? ChangeToGridButton()
+                : Container()
+          ],
         ),
-        backgroundColor:
-            global.isDarkModeEnabled ? Colors.black26 : Colors.amber[300],
-        foregroundColor: global.isDarkModeEnabled ? Colors.white : Colors.black,
-        iconTheme: IconThemeData(
-            color: global.isDarkModeEnabled ? Colors.white : Colors.black),
-        actions: [
-          // IconButton(
-          //     onPressed: () {
-          //       showSearch(
-          //           context: context,
-          //           delegate: SearchBar(
-          //             book: booksList,
-          //           ));
-          //     },
-          //     icon: Icon(Icons.search)),
-          MediaQuery.of(context).size.width < 650
-              ? ChangeToGridButton()
-              : Container()
-        ],
       ),
-    ));
+    );
   }
 }
 
@@ -176,48 +181,27 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 },
               ),
               ListTile(
-                  leading: Icon(
-                    Icons.favorite_outline_rounded,
-                    color: global.isDarkModeEnabled ? Colors.white : null,
-                  ),
-                  title: Text(
-                    'Favorite',
-                    style: TextStyle(
-                        color: global.isDarkModeEnabled ? Colors.white : null),
-                  ),
-                  onTap: () {
-                    if (currentRoute != '/favorite') {
-                      Navigator.pop(context);
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => FavoriteScreen()));
-                    } else {
-                      Navigator.pop(context);
-                    }
-                  }),
-              // ListTile(
-              //   leading: Icon(
-              //     Icons.coffee_sharp,
-              //     color: global.isDarkModeEnabled ? Colors.white : null,
-              //   ),
-              //   title: Text(
-              //     'Saweria',
-              //     style: TextStyle(
-              //         color: global.isDarkModeEnabled ? Colors.white : null),
-              //   ),
-              //   onTap: () {
-              //     Navigator.pop(context);
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) {
-              //           return FavoriteScreen();
-              //         },
-              //       ),
-              //     );
-              //   },
-              // ),
+                leading: Icon(
+                  Icons.favorite_outline_rounded,
+                  color: global.isDarkModeEnabled ? Colors.white : null,
+                ),
+                title: Text(
+                  'Favorite',
+                  style: TextStyle(
+                      color: global.isDarkModeEnabled ? Colors.white : null),
+                ),
+                onTap: () {
+                  if (currentRoute != '/favorite') {
+                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FavoriteScreen()));
+                  } else {
+                    Navigator.pop(context);
+                  }
+                },
+              ),
             ],
           ),
         ),
@@ -264,11 +248,13 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
           backgroundColor:
               global.isDarkModeEnabled ? Colors.black : Colors.amber,
           labelStyle: TextStyle(fontSize: 18.0),
-          onTap: () => setState(() {
-            global.isDarkModeEnabled = !global.isDarkModeEnabled;
-            addIsDark(global.isDarkModeEnabled);
-            runApp(MyApp());
-          }),
+          onTap: () => setState(
+            () {
+              global.isDarkModeEnabled = !global.isDarkModeEnabled;
+              addIsDark(global.isDarkModeEnabled);
+              runApp(MyApp());
+            },
+          ),
         ),
         SpeedDialChild(
           elevation: 0,
@@ -290,13 +276,15 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
               });
               runApp(MyApp());
             } else {
-              listItem.sort((a, b) {
-                print("isOrder false");
-                return b.title
-                    .toString()
-                    .toLowerCase()
-                    .compareTo(a.title.toString().toLowerCase());
-              });
+              listItem.sort(
+                (a, b) {
+                  print("isOrder false");
+                  return b.title
+                      .toString()
+                      .toLowerCase()
+                      .compareTo(a.title.toString().toLowerCase());
+                },
+              );
               runApp(MyApp());
             }
           },
@@ -325,35 +313,6 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
   }
 }
 
-class SearchBar extends StatefulWidget {
-  SearchBar({required this.book});
-  final List<Book> book;
-  @override
-  _SearchBarState createState() => _SearchBarState(book: book);
-}
-
-class _SearchBarState extends State<SearchBar> {
-  _SearchBarState({required this.book});
-  final List<Book> book;
-  @override
-  Widget build(BuildContext context) {
-    TextEditingController editingController = TextEditingController();
-    return Column(
-      children: [
-        Expanded(
-          child: TextField(
-            controller: editingController,
-            decoration: InputDecoration(
-                hintText: "Search",
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25.0)))),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 // ignore: must_be_immutable
 // class ExitPrompt extends StatefulWidget {
