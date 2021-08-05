@@ -1,5 +1,6 @@
 import 'package:buku_meonk/info.dart';
 import 'package:buku_meonk/main.dart';
+import 'package:buku_meonk/searchScreen.dart';
 import 'package:flutter/material.dart';
 
 Route goToInfoScreen(book, isMarked) {
@@ -30,6 +31,24 @@ Route goToHome() {
       const begin = Offset(0.0, 1.0);
       const end = Offset.zero;
       const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}
+
+Route goToSearch() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => SearchScreenMain(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.easeInOut;
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 

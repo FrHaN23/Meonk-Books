@@ -1,3 +1,4 @@
+import 'package:buku_meonk/routes.dart';
 import 'package:buku_meonk/searchScreen.dart';
 import 'package:buku_meonk/splashScreen.dart';
 import 'package:flutter/material.dart';
@@ -30,12 +31,11 @@ class MyApp extends StatelessWidget {
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //double _width = MediaQuery.of(context).size.width;
     ValueNotifier<bool> isDialOpen = ValueNotifier(false);
     global.getIsdark();
     return Scaffold(
       backgroundColor:
-          global.isDarkModeEnabled ? Colors.black : Colors.amber[50],
+          global.isDarkModeEnabled ? Colors.white : Colors.amber[50],
       appBar: AppBarDesign(
         titleAppBar: "Meonk Book",
       ),
@@ -76,11 +76,16 @@ class _AppBarDesignState extends State<AppBarDesign> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: ClipRRect(
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+        borderRadius: global.isDarkModeEnabled
+            ? BorderRadius.only(
+                bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0))
+            : BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10)),
         child: AppBar(
-          brightness:
-              global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
+          systemOverlayStyle: SystemUiOverlayStyle(
+              systemNavigationBarIconBrightness: Brightness.dark),
+          brightness: Brightness.dark,
           title: Text(
             titleAppBar,
             style: TextStyle(
@@ -88,7 +93,7 @@ class _AppBarDesignState extends State<AppBarDesign> {
             ),
           ),
           backgroundColor:
-              global.isDarkModeEnabled ? Colors.black26 : Colors.amber[300],
+              global.isDarkModeEnabled ? Colors.black : Colors.amber[300],
           foregroundColor:
               global.isDarkModeEnabled ? Colors.white : Colors.black,
           iconTheme: IconThemeData(
@@ -96,14 +101,7 @@ class _AppBarDesignState extends State<AppBarDesign> {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SearchScreenMain();
-                      },
-                    ),
-                  );
+                  Navigator.push(context, goToSearch());
                 },
                 icon: Icon(Icons.search)),
             MediaQuery.of(context).size.width < 650

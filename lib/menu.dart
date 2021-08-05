@@ -61,186 +61,184 @@ class MainMenuState extends State<MainMenu> {
             return true;
           },
           child: Container(
-              color:
-                  global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                // controller: _scrollController,
-                itemCount: booksList.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  final Book book = booksList[index];
-                  var isMarked = favoriteBookList.contains(book);
+            color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
+            child: ListView.builder(
+              physics: BouncingScrollPhysics(),
+              // controller: _scrollController,
+              itemCount: booksList.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final Book book = booksList[index];
+                var isMarked = favoriteBookList.contains(book);
 
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(goToInfoScreen(book, isMarked));
-                    },
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: global.isDarkModeEnabled
-                          ? Colors.black87
-                          : Colors.amber[100],
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  book.bookThumbnail,
-                                  height: 250,
-                                  fit: BoxFit.cover,
-                                  loadingBuilder: (context, child, progress) {
-                                    return progress == null
-                                        ? child
-                                        : CircularProgressIndicator(
-                                            color: Colors.amber,
-                                          );
-                                  },
-                                ),
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(goToInfoScreen(book, isMarked));
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: global.isDarkModeEnabled
+                        ? Colors.black87
+                        : Colors.amber[100],
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                book.bookThumbnail,
+                                height: 250,
+                                fit: BoxFit.cover,
+                                loadingBuilder: (context, child, progress) {
+                                  return progress == null
+                                      ? child
+                                      : CircularProgressIndicator(
+                                          color: Colors.amber,
+                                        );
+                                },
                               ),
                             ),
-                            Expanded(
-                              flex: 4,
-                              child: Padding(
-                                padding: EdgeInsets.all(12),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      book.title,
-                                      style: TextStyle(
-                                          fontSize: _width < 400 ? 16 : 18,
-                                          fontWeight: FontWeight.bold,
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: Padding(
+                              padding: EdgeInsets.all(12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    book.title,
+                                    style: TextStyle(
+                                        fontSize: _width < 400 ? 16 : 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: global.isDarkModeEnabled
+                                            ? Colors.white
+                                            : null),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    book.author,
+                                    style: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontSize: _width < 500 ? 12 : 16,
+                                      color: global.isDarkModeEnabled
+                                          ? Colors.white
+                                          : null,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      AbsorbPointer(
+                                        child: RatingBar(
+                                          initialRating: book.rating,
+                                          updateOnDrag: false,
+                                          tapOnlyMode: false,
+                                          itemSize: 20,
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 5,
+                                          ratingWidget: RatingWidget(
+                                              full: Icon(Icons.star,
+                                                  color: Colors.orange),
+                                              half: Icon(
+                                                Icons.star_half,
+                                                color: Colors.orange,
+                                              ),
+                                              empty: Icon(
+                                                Icons.star_outline,
+                                                color: Colors.orange,
+                                              )),
+                                          onRatingUpdate: (value) {},
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        book.rating.toString(),
+                                        style: TextStyle(
                                           color: global.isDarkModeEnabled
                                               ? Colors.white
-                                              : null),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      book.author,
-                                      style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: _width < 500 ? 12 : 16,
-                                        color: global.isDarkModeEnabled
-                                            ? Colors.white
-                                            : null,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      children: [
-                                        AbsorbPointer(
-                                          child: RatingBar(
-                                            initialRating: book.rating,
-                                            updateOnDrag: false,
-                                            tapOnlyMode: false,
-                                            itemSize: 20,
-                                            direction: Axis.horizontal,
-                                            allowHalfRating: true,
-                                            itemCount: 5,
-                                            ratingWidget: RatingWidget(
-                                                full: Icon(Icons.star,
-                                                    color: Colors.orange),
-                                                half: Icon(
-                                                  Icons.star_half,
-                                                  color: Colors.orange,
-                                                ),
-                                                empty: Icon(
-                                                  Icons.star_outline,
-                                                  color: Colors.orange,
-                                                )),
-                                            onRatingUpdate: (value) {},
-                                          ),
+                                              : null,
+                                          fontSize: _width < 500 ? 12 : 14,
                                         ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          book.rating.toString(),
-                                          style: TextStyle(
-                                            color: global.isDarkModeEnabled
-                                                ? Colors.white
-                                                : null,
-                                            fontSize: _width < 500 ? 12 : 14,
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      )
+                                    ],
+                                  ),
 
-                                    SizedBox(
-                                      height: 10,
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    book.description,
+                                    maxLines: _width <= 500 ? 9 : 7,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                      color: global.isDarkModeEnabled
+                                          ? Colors.white
+                                          : null,
+                                      fontSize: _width < 400
+                                          ? 12
+                                          : _width <= 500
+                                              ? 13.5
+                                              : 16,
                                     ),
-                                    Text(
-                                      book.description,
-                                      maxLines: _width <= 500 ? 9 : 7,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.justify,
-                                      style: TextStyle(
-                                        color: global.isDarkModeEnabled
-                                            ? Colors.white
-                                            : null,
-                                        fontSize: _width < 400
-                                            ? 12
-                                            : _width <= 500
-                                                ? 13.5
-                                                : 16,
-                                      ),
-                                    ),
+                                  ),
 
-                                    //Text(
-                                    //    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
-                                  ],
-                                ),
+                                  //Text(
+                                  //    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+                                ],
                               ),
                             ),
-                            Container(
-                              child: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    if (isMarked) {
-                                      favoriteBookList.remove(book);
-                                    } else {
-                                      favoriteBookList.add(book);
-                                    }
-                                  });
-                                },
-                                icon: Icon(
-                                  isMarked
-                                      ? Icons.bookmark
-                                      : Icons.bookmark_outline,
-                                  size: _width < 500
-                                      ? 30
-                                      : _width < 600
-                                          ? 35
-                                          : 40,
-                                ),
-                                color: global.isDarkModeEnabled
-                                    ? Colors.white
-                                    : null,
+                          ),
+                          Container(
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (isMarked) {
+                                    favoriteBookList.remove(book);
+                                  } else {
+                                    favoriteBookList.add(book);
+                                  }
+                                });
+                              },
+                              icon: Icon(
+                                isMarked
+                                    ? Icons.bookmark
+                                    : Icons.bookmark_outline,
+                                size: _width < 500
+                                    ? 30
+                                    : _width < 600
+                                        ? 35
+                                        : 40,
                               ),
+                              color: global.isDarkModeEnabled
+                                  ? Colors.white
+                                  : null,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  );
-                },
-              )),
+                  ),
+                );
+              },
+            ),
+          ),
         ),
       ),
     );
