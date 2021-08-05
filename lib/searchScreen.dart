@@ -26,13 +26,13 @@ class _AppBarDesignState extends State<SearchBar> {
     return SafeArea(
       child: ClipRRect(
         borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+            bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),
         child: AppBar(
           brightness:
               global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
           title: searchField(),
           backgroundColor:
-              global.isDarkModeEnabled ? Colors.black26 : Colors.amber[300],
+              global.isDarkModeEnabled ? Colors.black : Colors.amber[300],
           foregroundColor:
               global.isDarkModeEnabled ? Colors.white : Colors.black,
           iconTheme: IconThemeData(
@@ -47,13 +47,13 @@ class _AppBarDesignState extends State<SearchBar> {
       controller: _searchQueryController,
       autofocus: true,
       decoration: InputDecoration(
-        hintText: "Search Using ISBN, Title Or Author.",
+        hintText: "Search Using ISBN, Title Or Author",
         border: InputBorder.none,
         hintStyle: TextStyle(
             color: global.isDarkModeEnabled ? Colors.white60 : Colors.black54),
       ),
       style: TextStyle(
-          color: global.isDarkModeEnabled ? Colors.white60 : Colors.black54,
+          color: global.isDarkModeEnabled ? Colors.white : Colors.black54,
           fontSize: 20),
       // onChanged: (query)=>updateSearchQuery(query)
     );
