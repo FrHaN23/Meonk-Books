@@ -1,4 +1,5 @@
 import 'package:buku_meonk/searchScreen.dart';
+import 'package:buku_meonk/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Meonk Books',
       routes: {'/favorite': (context) => FavoriteScreen()},
       theme: ThemeData(),
-      home: Main(),
+      home: SplashScreenMain(),
     );
   }
 }
