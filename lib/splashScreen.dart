@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:buku_meonk/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:buku_meonk/global.dart' as global;
 
 class SplashScreenMain extends StatefulWidget {
   const SplashScreenMain({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class _SplashScreenMainState extends State<SplashScreenMain> {
   @override
   void initState() {
     super.initState();
+    global.getIsdark();
     _navigateToHome();
   }
 

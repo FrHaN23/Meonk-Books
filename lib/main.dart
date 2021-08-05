@@ -1,5 +1,4 @@
 import 'package:buku_meonk/routes.dart';
-import 'package:buku_meonk/searchScreen.dart';
 import 'package:buku_meonk/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -32,7 +31,6 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ValueNotifier<bool> isDialOpen = ValueNotifier(false);
-    global.getIsdark();
     return Scaffold(
       backgroundColor:
           global.isDarkModeEnabled ? Colors.white : Colors.amber[50],
