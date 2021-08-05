@@ -83,9 +83,8 @@ class _AppBarDesignState extends State<AppBarDesign> {
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10)),
         child: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
-              systemNavigationBarIconBrightness: Brightness.dark),
-          brightness: Brightness.dark,
+          brightness:
+              global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
           title: Text(
             titleAppBar,
             style: TextStyle(

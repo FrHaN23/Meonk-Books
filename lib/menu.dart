@@ -257,12 +257,11 @@ class MainMenuGridState extends State<MainMenuGrid> {
     print(_width.toString());
     return Scrollbar(
       child: Container(
-        color: global.isDarkModeEnabled ? Colors.white10 : Colors.amber[50],
-        child: Padding(
-          padding: EdgeInsets.all(15),
+        color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
+        child: Container(
           child: GridView.count(
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 10,
+            crossAxisSpacing: 0,
+            mainAxisSpacing: 0,
             crossAxisCount: _width < 400
                 ? 2
                 : _width < 600
@@ -328,7 +327,7 @@ class MainMenuGridState extends State<MainMenuGrid> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: Padding(
+                            child: Container(
                               padding: EdgeInsets.all(10),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
