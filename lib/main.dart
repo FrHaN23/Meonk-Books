@@ -138,7 +138,6 @@ class _DrawerDesignState extends State<DrawerDesign> {
   @override
   Widget build(BuildContext context) {
     String? currentRoute = ModalRoute.of(context)?.settings.name;
-    print(currentRoute);
     return SafeArea(
       child: Drawer(
         child: Container(
@@ -264,7 +263,6 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
             global.isOrderByAlphabetical = !global.isOrderByAlphabetical;
             if (global.isOrderByAlphabetical) {
               listItem.sort((a, b) {
-                print("isOrder true");
                 return a.title
                     .toString()
                     .toLowerCase()
@@ -274,7 +272,6 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
             } else {
               listItem.sort(
                 (a, b) {
-                  print("isOrder false");
                   return b.title
                       .toString()
                       .toLowerCase()

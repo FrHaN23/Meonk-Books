@@ -49,7 +49,6 @@ class MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-    print(_width);
     return Scaffold(
       body: SafeArea(
         child: WillPopScope(
@@ -254,7 +253,6 @@ class MainMenuGridState extends State<MainMenuGrid> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-    print(_width.toString());
     return Scrollbar(
       child: Container(
         color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
