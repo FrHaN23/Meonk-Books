@@ -219,15 +219,15 @@ class FavoriteGridState extends State<FavoriteGrid> {
         child: Padding(
           padding: EdgeInsets.all(15),
           child: GridView.count(
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: _width < 700
-                ? 1
-                : _width < 1100
+            crossAxisSpacing: 0,
+            mainAxisSpacing: 0,
+            crossAxisCount: _width < 400
+                ? 2
+                : _width < 600
                     ? 2
-                    : _width < 1300
+                    : _width < 900
                         ? 3
-                        : _width < 1600
+                        : _width < 1200
                             ? 4
                             : 5,
             children: favoriteBookList.map(
