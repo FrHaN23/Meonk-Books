@@ -170,7 +170,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
                   if (currentRoute != '/') {
                     Navigator.pop(context);
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => MyApp()));
+                        MaterialPageRoute(builder: (context) => Main()));
                   } else {
                     Navigator.pop(context);
                   }
