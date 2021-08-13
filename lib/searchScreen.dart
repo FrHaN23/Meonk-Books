@@ -77,6 +77,7 @@ class _AppBarDesignState extends State<SearchBar> {
           color: global.isDarkModeEnabled ? Colors.white : Colors.black,
           fontSize: 20),
       onChanged: (query) {
+        queryList.clear();
         if (query.isNotEmpty) {
           for (int i = 0; i < bookList.length; i++) {
             if (bookList[i].title.toLowerCase().contains(query.toLowerCase())) {
@@ -84,6 +85,9 @@ class _AppBarDesignState extends State<SearchBar> {
               runApp(MyApp());
             }
           }
+        }
+        if (query.isEmpty) {
+          queryList.clear();
         }
       },
     );
