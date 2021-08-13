@@ -68,7 +68,7 @@ class _AppBarDesignState extends State<SearchBar> {
       controller: _searchQueryController,
       autofocus: true,
       decoration: InputDecoration(
-        hintText: "Search Using ISBN, Title Or Author",
+        hintText: "Search ISBN, Title or Author",
         border: InputBorder.none,
         hintStyle: TextStyle(
             color: global.isDarkModeEnabled ? Colors.white60 : Colors.black54),
@@ -80,7 +80,11 @@ class _AppBarDesignState extends State<SearchBar> {
         queryList.clear();
         if (query.isNotEmpty) {
           for (int i = 0; i < bookList.length; i++) {
-            if (bookList[i].title.toLowerCase().contains(query.toLowerCase())) {
+            if (bookList[i].title.toLowerCase().contains(query.toLowerCase()) ||
+                bookList[i]
+                    .author
+                    .toLowerCase()
+                    .contains(query.toLowerCase())) {
               queryList.add(bookList[i]);
               runApp(MyApp());
             }
