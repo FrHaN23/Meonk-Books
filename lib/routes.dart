@@ -7,7 +7,7 @@ Route goToInfoScreen(book, isMarked) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => InfoScreen(
       book: book,
-      isMarked: isMarked,
+      isMarked: !isMarked,
     ),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(0.0, 1.0);

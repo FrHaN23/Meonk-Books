@@ -364,3 +364,4 @@ var booksList = [
 ];
 
 var favoriteBookList = [];
+List<Book> queryList = [];
