@@ -1,3 +1,5 @@
+import 'package:buku_meonk/View.dart';
+import 'package:buku_meonk/main.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
 import 'package:buku_meonk/global.dart' as global;
@@ -7,28 +9,10 @@ class SearchScreenMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: SearchBar(),
-        body: Scrollbar(
-          child: Container(
-            color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
-            child: Container(
-              child: GridView.count(
-                crossAxisCount: _width < 400
-                    ? 2
-                    : _width < 600
-                        ? 2
-                        : _width < 900
-                            ? 3
-                            : _width < 1200
-                                ? 4
-                                : 5,
-                // children: queryList.map((book) {}).toList(),
-                // TODO
-              ),
-            ),
-          ),
+        body: GridViewMain(
+          list: queryList,
         ));
   }
 }
@@ -51,6 +35,22 @@ class _AppBarDesignState extends State<SearchBar> {
           brightness:
               global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
           title: searchField(),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  queryList.clear();
+                  _searchQueryController.clear();
+                  runApp(MyApp());
+                },
+                icon: Icon(Icons.close_rounded))
+          ],
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              queryList.clear();
+              Navigator.of(context).pop();
+            },
+          ),
           backgroundColor:
               global.isDarkModeEnabled ? Colors.black : Colors.amber[300],
           foregroundColor:
@@ -81,6 +81,7 @@ class _AppBarDesignState extends State<SearchBar> {
           for (int i = 0; i < bookList.length; i++) {
             if (bookList[i].title.toLowerCase().contains(query.toLowerCase())) {
               queryList.add(bookList[i]);
+              runApp(MyApp());
             }
           }
         }
