@@ -88,6 +88,7 @@ class _AppBarDesignState extends State<SearchBar> {
         }
         if (query.isEmpty) {
           queryList.clear();
+          runApp(MyApp());
         }
       },
     );
