@@ -1,6 +1,7 @@
 class Book {
   String title;
   String author;
+  String publisher;
   double rating;
   String description;
   String bookThumbnail;
@@ -10,6 +11,7 @@ class Book {
   Book(
       {required this.title,
       required this.author,
+      required this.publisher,
       required this.rating,
       required this.description,
       required this.bookThumbnail,
@@ -35,6 +37,7 @@ class Reviewer {
 var booksList = [
   Book(
     title: 'ULYSSES',
+    publisher: "Shakespeare and Company",
     author: 'James Joyce',
     rating: 4.87,
     description:
@@ -83,7 +86,8 @@ var booksList = [
   ),
   Book(
       title: 'THE GREAT GATSBY',
-      author: ' F. Scott Fitzgerald',
+      publisher: "Charles Scribner's Sons",
+      author: 'F. Scott Fitzgerald',
       rating: 4.75,
       description:
           'Set in the Jazz Age, The Great Gatsby tells the story of the mysterious millionaire Jay Gatsby, his decadent parties, and his love for the alluring Daisy Buchanan. Dismissed as “no more than a glorified anecdote, and not too probable at that” (The Chicago Tribune), The Great Gatsby is now considered a contender for “the Great American Novel.” Fitzgerald wanted to title the novel “Trimalchio in West Egg,” but both his wife and his editor preferred “The Great Gatsby.” Fitzgerald gave in, though he still thought that “the title is only fair, rather bad than good.”',
@@ -130,6 +134,7 @@ var booksList = [
       ]),
   Book(
       title: 'A PORTRAIT OF THE ARTIST AS A YOUNG MAN',
+      publisher: 'B. W. Huebsch',
       author: 'James Joyce',
       rating: 4.49,
       description:
@@ -176,6 +181,7 @@ var booksList = [
   Book(
       title: 'LOLITA',
       author: 'Vladimir Nabokov',
+      publisher: 'Olympia Press',
       rating: 4.52,
       description:
           'Lolita tells the story of middle-aged Humbert Humbert’s love for twelve-year-old Dolores Haze. The concept is troubling, but the novel defies any kind of label, though it has been heralded as a hilarious satire, a bitter tragedy, and even an allegory for U.S.-European relations. In Reading Lolita in Tehran, Azar Nafisi summarized the book as “hopeful, beautiful even, a defense not just of beauty but of life . . . Nabokov, through his portrayal of Humbert, has exposed all solipsists who take over other people’s lives.”',
@@ -222,6 +228,7 @@ var booksList = [
       ]),
   Book(
       title: 'BRAVE NEW WORLD',
+      publisher: 'Chatto & Windus',
       author: 'Aldous Huxley',
       rating: 4.28,
       description:
@@ -269,6 +276,7 @@ var booksList = [
       ]),
   Book(
       title: 'THE SOUND AND THE FURY',
+      publisher: 'Jonathan Cape and Harrison Smith',
       author: 'William Faulkner',
       rating: 4.37,
       description:
@@ -316,6 +324,7 @@ var booksList = [
       ]),
   Book(
       title: 'CATCH-22',
+      publisher: 'Simon & Schuster',
       author: 'Joseph Heller',
       rating: 4.18,
       description:
