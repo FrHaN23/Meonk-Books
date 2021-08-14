@@ -6,7 +6,6 @@ import 'package:buku_meonk/global.dart' as global;
 
 class SearchScreenMain extends StatelessWidget {
   const SearchScreenMain({Key? key, book, isMarked}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

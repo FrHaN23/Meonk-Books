@@ -20,6 +20,7 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
+    bool isDescriptionExpanded = false;
     var isMarked = favoriteBookList.contains(book);
     return Scaffold(
       backgroundColor:
@@ -215,12 +216,20 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                 ),
                 Column(
                   children: [
-                    Container(
-                      child: Padding(
+                    TextButton(
+                      onPressed: () {
+                        isDescriptionExpanded = !isDescriptionExpanded;
+                      },
+                      child: Container(
                         padding: EdgeInsets.fromLTRB(15, 5, 30, 10),
                         child: Center(
                           child: Text(
                             book.description,
+                            // overflow: TextOverflow.ellipsis,
+                            // maxLines: isDescriptionExpanded
+                            //     ? book.description.length
+                            //     : 6,
+                            //TODO
                             textAlign: TextAlign.justify,
                             style: TextStyle(
                               fontSize: _width < 400
@@ -230,12 +239,12 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                                       : 16,
                               color: global.isDarkModeEnabled
                                   ? Colors.white
-                                  : null,
+                                  : Colors.black,
                             ),
                           ),
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
                 Divider(),
