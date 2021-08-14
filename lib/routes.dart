@@ -1,6 +1,6 @@
 import 'package:buku_meonk/info.dart';
 import 'package:buku_meonk/main.dart';
-import 'package:buku_meonk/searchScreen.dart';
+import 'package:buku_meonk/screens/searchScreen.dart';
 import 'package:flutter/material.dart';
 
 Route goToInfoScreen(book, isMarked) {

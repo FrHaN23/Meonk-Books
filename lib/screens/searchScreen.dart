@@ -1,4 +1,4 @@
-import 'package:buku_meonk/View.dart';
+import 'package:buku_meonk/screens/View.dart';
 import 'package:buku_meonk/main.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';

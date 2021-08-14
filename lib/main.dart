@@ -1,12 +1,12 @@
 import 'package:buku_meonk/routes.dart';
-import 'package:buku_meonk/splashScreen.dart';
+import 'package:buku_meonk/screens/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:buku_meonk/menu.dart';
 import 'package:buku_meonk/model/books.dart';
-import 'package:buku_meonk/favorite.dart';
+import 'package:buku_meonk/screens/favorite.dart';
 import 'package:buku_meonk/global.dart' as global;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -281,14 +281,6 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
               runApp(MyApp());
             }
           },
-        ),
-        SpeedDialChild(
-          child: Icon(Icons.keyboard_voice),
-          backgroundColor: Colors.green,
-          label: 'Third',
-          labelStyle: TextStyle(fontSize: 18.0),
-          onTap: () => print('THIRD CHILD'),
-          onLongPress: () => print('THIRD CHILD LONG PRESS'),
         ),
       ],
     );
