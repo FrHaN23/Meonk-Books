@@ -27,7 +27,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Main extends StatelessWidget {
+class Main extends StatefulWidget {
+  @override
+  _MainState createState() => _MainState();
+}
+
+class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     ValueNotifier<bool> isDialOpen = ValueNotifier(false);
@@ -121,8 +126,10 @@ class ChangeToGridButtonState extends State<ChangeToGridButton> {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        global.isGridModeEnabled = !global.isGridModeEnabled;
-        runApp(MyApp());
+        setState(() {
+          global.isGridModeEnabled = !global.isGridModeEnabled;
+          runApp(MyApp());
+        });
       },
       icon: Icon(Icons.auto_awesome_mosaic_outlined),
     );
@@ -282,6 +289,30 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
             }
           },
         ),
+        SpeedDialChild(
+            elevation: 0,
+            child: Icon(Icons.plus_one_rounded),
+            onTap: () {
+              setState(() {
+                booksList.add(Book(
+                    title: "abc",
+                    author: "author",
+                    publisher: 'publisher',
+                    rating: 2,
+                    description: "abc",
+                    bookThumbnail: "hyp",
+                    bookCover: "bookCover",
+                    reviewer: [
+                      Reviewer(
+                          photoProfile: "photoProfile",
+                          subject: "subject",
+                          rating: 2,
+                          name: "name",
+                          description: "description")
+                    ]));
+                runApp(MyApp());
+              });
+            })
       ],
     );
   }

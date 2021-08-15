@@ -1,4 +1,3 @@
-import 'package:buku_meonk/main.dart';
 import 'package:flutter/material.dart';
 import 'package:buku_meonk/model/books.dart';
 import 'package:buku_meonk/routes.dart';
@@ -9,21 +8,61 @@ import 'package:buku_meonk/global.dart' as global;
 class ListViewMain extends StatefulWidget {
   ListViewMain({Key? key, required this.list}) : super(key: key);
   List<dynamic> list;
+
   @override
   _ListViewMainState createState() => _ListViewMainState(list: list);
 }
 
 class _ListViewMainState extends State<ListViewMain> {
   _ListViewMainState({required this.list});
-  List<dynamic> list;
+  ScrollController _scrollController = ScrollController();
+
+  List list;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.extentAfter < list.length) {
+      setState(() {
+        booksList.add(Book(
+            title: "abc",
+            author: "author",
+            publisher: 'publisher',
+            rating: 2,
+            description: "abc",
+            bookThumbnail: "hyp",
+            bookCover: "bookCover",
+            reviewer: [
+              Reviewer(
+                  photoProfile: "photoProfile",
+                  subject: "subject",
+                  rating: 2,
+                  name: "name",
+                  description: "description")
+            ]));
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
+    double _height = MediaQuery.of(context).size.height;
     return Container(
+      height: _height,
       color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
-        // controller: _scrollController,
+        controller: _scrollController,
         itemCount: list.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
@@ -238,7 +277,6 @@ class _GridViewMainState extends State<GridViewMain> {
                               label: 'Undo',
                               onPressed: () {
                                 favoriteBookList.add(book);
-                                runApp(MyApp());
                               },
                             ),
                           );
@@ -252,7 +290,6 @@ class _GridViewMainState extends State<GridViewMain> {
                               label: 'Undo',
                               onPressed: () {
                                 favoriteBookList.remove(book);
-                                runApp(MyApp());
                               },
                             ),
                           );

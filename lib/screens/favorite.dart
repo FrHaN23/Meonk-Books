@@ -11,7 +11,7 @@ class FavoriteScreen extends StatelessWidget {
     ValueNotifier<bool> isDialOpen = ValueNotifier(false);
     return Scaffold(
       backgroundColor:
-          global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
+          global.isDarkModeEnabled ? Colors.white : Colors.amber[50],
       appBar: AppBarDesign(
         titleAppBar: "Favorite",
       ),

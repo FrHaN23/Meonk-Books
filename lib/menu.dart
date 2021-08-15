@@ -12,36 +12,11 @@ class MainMenu extends StatefulWidget {
 }
 
 class MainMenuState extends State<MainMenu> {
-  // final ScrollController _scrollController = ScrollController();
   MainMenuState({required this.isDialOpen});
   var isDialOpen;
   @override
-  // void initState() {
-  //   _scrollController.addListener(scrolled);
-  //   super.initState();
-  // }
-
-  // void scrolled() {
-  //   if (_scrollController.hasClients) {
-  //     if (_scrollController.position.userScrollDirection ==
-  //         ScrollDirection.reverse) {
-  //
-  //     } else if (_scrollController.position.userScrollDirection ==
-  //         ScrollDirection.forward) {
-  //
-  //     }
-  //   }
-  // }
-
-  // @override
-  // void dispose() {
-  //   _scrollController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: WillPopScope(

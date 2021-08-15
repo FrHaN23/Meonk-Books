@@ -4,8 +4,14 @@ import 'package:buku_meonk/model/books.dart';
 import 'package:flutter/material.dart';
 import 'package:buku_meonk/global.dart' as global;
 
-class SearchScreenMain extends StatelessWidget {
+class SearchScreenMain extends StatefulWidget {
   const SearchScreenMain({Key? key, book, isMarked}) : super(key: key);
+
+  @override
+  _SearchScreenMainState createState() => _SearchScreenMainState();
+}
+
+class _SearchScreenMainState extends State<SearchScreenMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +31,12 @@ class SearchBar extends StatefulWidget implements PreferredSizeWidget {
 class _AppBarDesignState extends State<SearchBar> {
   TextEditingController _searchQueryController = TextEditingController();
   @override
+  void dispose() {
+    _searchQueryController..dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: ClipRRect(
@@ -37,9 +49,10 @@ class _AppBarDesignState extends State<SearchBar> {
           actions: [
             IconButton(
                 onPressed: () {
-                  queryList.clear();
-                  _searchQueryController.clear();
-                  runApp(MyApp());
+                  setState(() {
+                    queryList.clear();
+                    _searchQueryController.clear();
+                  });
                 },
                 icon: Icon(Icons.close_rounded))
           ],
@@ -77,22 +90,27 @@ class _AppBarDesignState extends State<SearchBar> {
           fontSize: 20),
       onChanged: (query) {
         queryList.clear();
-        if (query.isNotEmpty) {
-          for (int i = 0; i < bookList.length; i++) {
-            if (bookList[i].title.toLowerCase().contains(query.toLowerCase()) ||
-                bookList[i]
-                    .author
-                    .toLowerCase()
-                    .contains(query.toLowerCase())) {
-              queryList.add(bookList[i]);
-              runApp(MyApp());
+        setState(() {
+          if (query.isNotEmpty) {
+            for (int i = 0; i < bookList.length; i++) {
+              if (bookList[i]
+                      .title
+                      .toLowerCase()
+                      .contains(query.toLowerCase()) ||
+                  bookList[i]
+                      .author
+                      .toLowerCase()
+                      .contains(query.toLowerCase())) {
+                queryList.add(bookList[i]);
+                return runApp(MyApp());
+              }
             }
           }
-        }
-        if (query.isEmpty) {
-          queryList.clear();
-          runApp(MyApp());
-        }
+          if (query.isEmpty) {
+            queryList.clear();
+            return runApp(MyApp());
+          }
+        });
       },
     );
   }
