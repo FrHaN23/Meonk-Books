@@ -47,22 +47,9 @@ class _AppBarDesignState extends State<SearchBar> {
               global.isDarkModeEnabled ? Brightness.dark : Brightness.light,
           title: searchField(),
           actions: [
-            IconButton(
-                onPressed: () {
-                  setState(() {
-                    queryList.clear();
-                    _searchQueryController.clear();
-                  });
-                },
-                icon: Icon(Icons.close_rounded))
+            clearButton(),
           ],
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              queryList.clear();
-              Navigator.of(context).pop();
-            },
-          ),
+          leading: popButton(),
           backgroundColor:
               global.isDarkModeEnabled ? Colors.black : Colors.amber[300],
           foregroundColor:
@@ -71,6 +58,28 @@ class _AppBarDesignState extends State<SearchBar> {
               color: global.isDarkModeEnabled ? Colors.white : Colors.black),
         ),
       ),
+    );
+  }
+
+  Widget clearButton() {
+    return IconButton(
+        onPressed: () {
+          setState(() {
+            queryList.clear();
+            _searchQueryController.clear();
+            runApp(MyApp());
+          });
+        },
+        icon: Icon(Icons.close_rounded));
+  }
+
+  Widget popButton() {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        queryList.clear();
+        Navigator.of(context).pop();
+      },
     );
   }
 
@@ -93,14 +102,14 @@ class _AppBarDesignState extends State<SearchBar> {
         setState(() {
           if (query.isNotEmpty) {
             for (int i = 0; i < bookList.length; i++) {
-              if (bookList[i]
-                      .title
-                      .toLowerCase()
-                      .contains(query.toLowerCase()) ||
-                  bookList[i]
-                      .author
-                      .toLowerCase()
-                      .contains(query.toLowerCase())) {
+              var titleChecking =
+                  bookList[i].title.toLowerCase().contains(query.toLowerCase());
+              var authorChecking = bookList[i]
+                  .author
+                  .toLowerCase()
+                  .contains(query.toLowerCase());
+
+              if (titleChecking || authorChecking) {
                 queryList.add(bookList[i]);
                 return runApp(MyApp());
               }

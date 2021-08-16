@@ -18,6 +18,7 @@ class _ListViewMainState extends State<ListViewMain> {
   ScrollController _scrollController = ScrollController();
 
   List list;
+  int listLength = 5;
   @override
   void initState() {
     super.initState();
@@ -31,24 +32,14 @@ class _ListViewMainState extends State<ListViewMain> {
   }
 
   void _scrollListener() {
+    if (_scrollController.position.extentAfter > list.length) {
+      setState(() {
+        listLength = list.length;
+      });
+    }
     if (_scrollController.position.extentAfter < list.length) {
       setState(() {
-        booksList.add(Book(
-            title: "abc",
-            author: "author",
-            publisher: 'publisher',
-            rating: 2,
-            description: "abc",
-            bookThumbnail: "hyp",
-            bookCover: "bookCover",
-            reviewer: [
-              Reviewer(
-                  photoProfile: "photoProfile",
-                  subject: "subject",
-                  rating: 2,
-                  name: "name",
-                  description: "description")
-            ]));
+        listLength += 1;
       });
     }
   }
@@ -57,13 +48,14 @@ class _ListViewMainState extends State<ListViewMain> {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
+
     return Container(
       height: _height,
       color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         controller: _scrollController,
-        itemCount: list.length,
+        itemCount: listLength,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           final Book book = list[index];
