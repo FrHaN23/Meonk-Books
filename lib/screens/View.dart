@@ -19,6 +19,7 @@ class _ListViewMainState extends State<ListViewMain> {
 
   List list;
   int listLength = 5;
+  var isOutOfRange = false;
   @override
   void initState() {
     super.initState();
@@ -35,6 +36,7 @@ class _ListViewMainState extends State<ListViewMain> {
     if (_scrollController.position.extentAfter > list.length) {
       setState(() {
         listLength = list.length;
+        isOutOfRange = true;
       });
     }
     if (_scrollController.position.extentAfter < list.length) {
@@ -44,19 +46,17 @@ class _ListViewMainState extends State<ListViewMain> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget getBody() {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
-
     return Container(
       height: _height,
       color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         controller: _scrollController,
-        itemCount: listLength,
-        shrinkWrap: true,
+        itemCount: isOutOfRange ? list.length : listLength,
+        shrinkWrap: false,
         itemBuilder: (context, index) {
           final Book book = list[index];
           var isMarked = favoriteBookList.contains(book);
@@ -69,7 +69,7 @@ class _ListViewMainState extends State<ListViewMain> {
               shadowColor: Colors.black,
               color:
                   global.isDarkModeEnabled ? Colors.black87 : Colors.amber[100],
-              child: Padding(
+              child: Container(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,6 +220,11 @@ class _ListViewMainState extends State<ListViewMain> {
         },
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return getBody();
   }
 }
 
