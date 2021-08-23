@@ -92,14 +92,17 @@ class InfoScreenMobileState extends State<InfoScreenMobile> {
                             padding:
                                 EdgeInsets.only(top: _width > 1200 ? 100 : 55),
                             child: Center(
-                                child: Image.network(book.bookCover,
-                                    loadingBuilder: (context, child, progress) {
-                              return progress == null
-                                  ? child
-                                  : CircularProgressIndicator(
-                                      color: Colors.amber,
-                                    );
-                            })),
+                                child: Hero(
+                              tag: book.bookThumbnail,
+                              child: Image.network(book.bookCover,
+                                  loadingBuilder: (context, child, progress) {
+                                return progress == null
+                                    ? child
+                                    : CircularProgressIndicator(
+                                        color: Colors.amber,
+                                      );
+                              }),
+                            )),
                           ),
                         ),
                       ),

@@ -77,18 +77,21 @@ class _ListViewMainState extends State<ListViewMain> {
                       flex: 3,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          book.bookThumbnail,
-                          height: 250,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, progress) {
-                            return progress == null
-                                ? child
-                                : Center(
-                                    child: CircularProgressIndicator(
-                                    color: Colors.amber,
-                                  ));
-                          },
+                        child: Hero(
+                          tag: book.bookThumbnail,
+                          child: Image.network(
+                            book.bookThumbnail,
+                            height: 250,
+                            fit: BoxFit.cover,
+                            loadingBuilder: (context, child, progress) {
+                              return progress == null
+                                  ? child
+                                  : Center(
+                                      child: CircularProgressIndicator(
+                                      color: Colors.amber,
+                                    ));
+                            },
+                          ),
                         ),
                       ),
                     ),
