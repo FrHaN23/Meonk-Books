@@ -54,7 +54,11 @@ class _ListViewMainState extends State<ListViewMain> {
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         controller: _scrollController,
-        itemCount: isOutOfRange ? list.length : viewListLength,
+        itemCount: list.length < 5
+            ? list.length
+            : isOutOfRange
+                ? list.length
+                : viewListLength,
         shrinkWrap: false,
         itemBuilder: (context, index) {
           final Book book = list[index];
