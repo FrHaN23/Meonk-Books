@@ -18,7 +18,7 @@ class _ListViewMainState extends State<ListViewMain> {
   ScrollController _scrollController = ScrollController();
 
   List list;
-  int listLength = 5;
+  int viewListLength = 5;
   var isOutOfRange = false;
   @override
   void initState() {
@@ -35,13 +35,12 @@ class _ListViewMainState extends State<ListViewMain> {
   void _scrollListener() {
     if (_scrollController.position.extentAfter > list.length) {
       setState(() {
-        listLength = list.length;
         isOutOfRange = true;
       });
     }
     if (_scrollController.position.extentAfter < list.length) {
       setState(() {
-        listLength += 1;
+        viewListLength += 1;
       });
     }
   }
@@ -55,7 +54,7 @@ class _ListViewMainState extends State<ListViewMain> {
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         controller: _scrollController,
-        itemCount: isOutOfRange ? list.length : listLength,
+        itemCount: isOutOfRange ? list.length : viewListLength,
         shrinkWrap: false,
         itemBuilder: (context, index) {
           final Book book = list[index];
@@ -73,10 +72,7 @@ class _ListViewMainState extends State<ListViewMain> {
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 5,
-                    ),
+                  children: [
                     Expanded(
                       flex: 3,
                       child: ClipRRect(
@@ -88,9 +84,10 @@ class _ListViewMainState extends State<ListViewMain> {
                           loadingBuilder: (context, child, progress) {
                             return progress == null
                                 ? child
-                                : CircularProgressIndicator(
+                                : Center(
+                                    child: CircularProgressIndicator(
                                     color: Colors.amber,
-                                  );
+                                  ));
                           },
                         ),
                       ),
