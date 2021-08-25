@@ -175,8 +175,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 onTap: () {
                   if (currentRoute != '/') {
                     Navigator.pop(context);
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Main()));
+                    Navigator.pushReplacement(context, goToHome());
                   } else {
                     Navigator.pop(context);
                   }
@@ -195,10 +194,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 onTap: () {
                   if (currentRoute != '/favorite') {
                     Navigator.pop(context);
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FavoriteScreen()));
+                    Navigator.pushReplacement(context, goTofavorite());
                   } else {
                     Navigator.pop(context);
                   }
