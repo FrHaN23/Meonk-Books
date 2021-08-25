@@ -11,5 +11,5 @@ getIsdark() async {
 }
 
 bool isScrollDown = false;
-bool isGridModeEnabled = false;
+bool isGridModeEnabled = true;
 bool isOrderByAlphabetical = false;

@@ -249,115 +249,113 @@ class _GridViewMainState extends State<GridViewMain> {
     return Scrollbar(
       child: Container(
         color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
-        child: Container(
-          child: GridView.count(
-            crossAxisSpacing: 0,
-            mainAxisSpacing: 0,
-            crossAxisCount: _width < 400
-                ? 2
-                : _width < 600
-                    ? 2
-                    : _width < 900
-                        ? 3
-                        : _width < 1200
-                            ? 4
-                            : 5,
-            children: list.map(
-              (book) {
-                var isMarked = favoriteBookList.contains(book);
-                return InkWell(
-                  onDoubleTap: () {
-                    setState(
-                      () {
-                        if (isMarked) {
-                          favoriteBookList.remove(book);
-                          final snackBar = SnackBar(
-                            content: Text('Removed from favorite'),
-                            duration: Duration(seconds: 1),
-                            action: SnackBarAction(
-                              label: 'Undo',
-                              onPressed: () {
-                                favoriteBookList.add(book);
-                              },
-                            ),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        } else {
-                          favoriteBookList.add(book);
-                          final snackBar = SnackBar(
-                            content: Text('Added to favorite'),
-                            duration: Duration(seconds: 1),
-                            action: SnackBarAction(
-                              label: 'Undo',
-                              onPressed: () {
-                                favoriteBookList.remove(book);
-                              },
-                            ),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                      },
-                    );
-                  },
-                  onTap: () {
-                    Navigator.of(context).push(goToInfoScreen(book, isMarked));
-                  },
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-                                child: Image.network(
-                                  book.bookThumbnail,
-                                  width: 300,
-                                  height: 300,
-                                  loadingBuilder: (context, child, progress) {
-                                    return progress == null
-                                        ? child
-                                        : Center(
-                                            child: CircularProgressIndicator(
-                                              color: Colors.amber,
-                                            ),
-                                          );
-                                  },
-                                  fit: BoxFit.cover,
-                                ),
+        child: GridView.count(
+          crossAxisCount: _width < 400
+              ? 2
+              : _width < 600
+                  ? 3
+                  : _width < 1200
+                      ? 4
+                      : 5,
+          children: list.map(
+            (book) {
+              var isMarked = favoriteBookList.contains(book);
+              return InkWell(
+                onDoubleTap: () {
+                  setState(
+                    () {
+                      if (isMarked) {
+                        favoriteBookList.remove(book);
+                        final snackBar = SnackBar(
+                          content: Text('Removed from favorite'),
+                          duration: Duration(seconds: 1),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              favoriteBookList.add(book);
+                            },
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } else {
+                        favoriteBookList.add(book);
+                        final snackBar = SnackBar(
+                          content: Text('Added to favorite'),
+                          duration: Duration(seconds: 1),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              favoriteBookList.remove(book);
+                            },
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                  );
+                },
+                onTap: () {
+                  Navigator.of(context).push(goToInfoScreen(book, isMarked));
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.network(
+                                book.bookThumbnail,
+                                width: 300,
+                                height: 300,
+                                loadingBuilder: (context, child, progress) {
+                                  return progress == null
+                                      ? child
+                                      : Center(
+                                          child: CircularProgressIndicator(
+                                            color: Colors.amber,
+                                          ),
+                                        );
+                                },
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                              child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Container(
-                              color: isMarked
-                                  ? Colors.black.withOpacity(0.19)
-                                  : null,
-                            ),
-                          ))
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            color: isMarked
+                                ? Colors.black.withOpacity(0.16)
+                                : null,
+                          ),
+                        ))
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10)),
+                          child: Container(
                             width: 300,
-                            margin: EdgeInsets.only(
-                                bottom: 10, left: 10, right: 10),
+                            margin: EdgeInsets.only(left: 8, right: 8),
                             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                            color: Colors.black.withOpacity(0.4),
+                            color: Colors.black.withOpacity(0.24),
                             child: Text(
                               book.title,
                               softWrap: true,
@@ -367,14 +365,14 @@ class _GridViewMainState extends State<GridViewMain> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              },
-            ).toList(),
-          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              );
+            },
+          ).toList(),
         ),
       ),
     );
