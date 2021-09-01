@@ -246,17 +246,18 @@ class _GridViewMainState extends State<GridViewMain> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
+    int crossAxisCountLimit = _width < 400
+        ? 2
+        : _width < 600
+            ? 3
+            : _width < 1200
+                ? 4
+                : 5;
     return Scrollbar(
       child: Container(
         color: global.isDarkModeEnabled ? Colors.black87 : Colors.amber[50],
         child: GridView.count(
-          crossAxisCount: _width < 400
-              ? 2
-              : _width < 600
-                  ? 3
-                  : _width < 1200
-                      ? 4
-                      : 5,
+          crossAxisCount: crossAxisCountLimit,
           children: list.map(
             (book) {
               var isMarked = favoriteBookList.contains(book);
@@ -308,20 +309,23 @@ class _GridViewMainState extends State<GridViewMain> {
                             padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(5),
-                              child: Image.network(
-                                book.bookThumbnail,
-                                width: 300,
-                                height: 300,
-                                loadingBuilder: (context, child, progress) {
-                                  return progress == null
-                                      ? child
-                                      : Center(
-                                          child: CircularProgressIndicator(
-                                            color: Colors.amber,
-                                          ),
-                                        );
-                                },
-                                fit: BoxFit.cover,
+                              child: Hero(
+                                tag: book.bookThumbnail,
+                                child: Image.network(
+                                  book.bookThumbnail,
+                                  width: 300,
+                                  height: 300,
+                                  loadingBuilder: (context, child, progress) {
+                                    return progress == null
+                                        ? child
+                                        : Center(
+                                            child: CircularProgressIndicator(
+                                              color: Colors.amber,
+                                            ),
+                                          );
+                                  },
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),

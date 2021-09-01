@@ -265,22 +265,29 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
           onTap: () {
             global.isOrderByAlphabetical = !global.isOrderByAlphabetical;
             if (global.isOrderByAlphabetical) {
-              listItem.sort((a, b) {
-                return a.title
-                    .toString()
-                    .toLowerCase()
-                    .compareTo(b.title.toString().toLowerCase());
+              setState(() {
+                listItem.sort(
+                  (a, b) {
+                    return a.title
+                        .toString()
+                        .toLowerCase()
+                        .compareTo(b.title.toString().toLowerCase());
+                  },
+                );
               });
               runApp(MyApp());
             } else {
-              listItem.sort(
-                (a, b) {
-                  return b.title
-                      .toString()
-                      .toLowerCase()
-                      .compareTo(a.title.toString().toLowerCase());
-                },
-              );
+              setState(() {
+                listItem.sort(
+                  (a, b) {
+                    return b.title
+                        .toString()
+                        .toLowerCase()
+                        .compareTo(a.title.toString().toLowerCase());
+                  },
+                );
+              });
+
               runApp(MyApp());
             }
           },
