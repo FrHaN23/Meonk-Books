@@ -109,7 +109,9 @@ class _AppBarDesignState extends State<SearchBar> {
                   .toLowerCase()
                   .contains(query.toLowerCase());
 
-              if (titleChecking || authorChecking) {
+              var isbnChecking = bookList[i].isbn.contains(query);
+
+              if (titleChecking || authorChecking || isbnChecking) {
                 queryList.add(bookList[i]);
                 return runApp(MyApp());
               }
