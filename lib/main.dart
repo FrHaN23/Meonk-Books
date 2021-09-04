@@ -287,7 +287,6 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
                   },
                 );
               });
-
               runApp(MyApp());
             }
           },
@@ -298,6 +297,7 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
             onTap: () {
               setState(() {
                 booksList.add(Book(
+                    isbn: 1444,
                     title: "abc",
                     author: "author",
                     publisher: 'publisher',
