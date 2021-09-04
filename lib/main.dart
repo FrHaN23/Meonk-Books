@@ -200,6 +200,31 @@ class _DrawerDesignState extends State<DrawerDesign> {
                   }
                 },
               ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ListTile(
+                    leading: Icon(
+                      Icons.login_rounded,
+                      color: global.isDarkModeEnabled ? Colors.white : null,
+                    ),
+                    title: Text(
+                      'Login',
+                      style: TextStyle(
+                          color:
+                              global.isDarkModeEnabled ? Colors.white : null),
+                    ),
+                    onTap: () {
+                      if (currentRoute != '/Login') {
+                        Navigator.pop(context);
+                        Navigator.push(context, goToLogin());
+                      } else {
+                        Navigator.pop(context);
+                      }
+                    },
+                  )
+                ],
+              )
             ],
           ),
         ),
@@ -297,7 +322,7 @@ class _SpeedDialDesignState extends State<SpeedDialDesign> {
             onTap: () {
               setState(() {
                 booksList.add(Book(
-                    isbn: 1444,
+                    isbn: '1444',
                     title: "abc",
                     author: "author",
                     publisher: 'publisher',

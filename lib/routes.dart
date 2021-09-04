@@ -1,5 +1,6 @@
 import 'package:buku_meonk/info.dart';
 import 'package:buku_meonk/main.dart';
+import 'package:buku_meonk/screens/LogIn.dart';
 import 'package:buku_meonk/screens/favorite.dart';
 import 'package:buku_meonk/screens/searchScreen.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,24 @@ Route goToHome() {
 Route goTofavorite() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => FavoriteScreen(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(-2.0, 0.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}
+
+Route goToLogin() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => LoginScreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(-2.0, 0.0);
       const end = Offset.zero;

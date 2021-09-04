@@ -1,5 +1,5 @@
 class Book {
-  int isbn;
+  String isbn;
   String title;
   String author;
   String publisher;
@@ -38,7 +38,7 @@ class Reviewer {
 
 var booksList = [
   Book(
-    isbn: 9780679455134,
+    isbn: '9780679455134',
     title: 'ULYSSES',
     publisher: "Shakespeare and Company",
     author: 'James Joyce',
@@ -88,7 +88,7 @@ var booksList = [
     ],
   ),
   Book(
-      isbn: 9780593201060,
+      isbn: '9780593201060',
       title: 'THE GREAT GATSBY',
       publisher: "Charles Scribner's Sons",
       author: 'F. Scott Fitzgerald',
@@ -137,7 +137,7 @@ var booksList = [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
       ]),
   Book(
-      isbn: 9780143108245,
+      isbn: '9780143108245',
       title: 'A PORTRAIT OF THE ARTIST AS A YOUNG MAN',
       publisher: 'B. W. Huebsch',
       author: 'James Joyce',
@@ -184,7 +184,7 @@ var booksList = [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
       ]),
   Book(
-      isbn: 9780679410430,
+      isbn: '9780679410430',
       title: 'LOLITA',
       author: 'Vladimir Nabokov',
       publisher: 'Olympia Press',
@@ -233,7 +233,7 @@ var booksList = [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
       ]),
   Book(
-      isbn: 9788466350945,
+      isbn: '9788466350945',
       title: 'BRAVE NEW WORLD',
       publisher: 'Chatto & Windus',
       author: 'Aldous Huxley',
@@ -282,7 +282,7 @@ var booksList = [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
       ]),
   Book(
-      isbn: 9780679600176,
+      isbn: '9780679600176',
       title: 'THE SOUND AND THE FURY',
       publisher: 'Jonathan Cape and Harrison Smith',
       author: 'William Faulkner',
@@ -331,7 +331,7 @@ var booksList = [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
       ]),
   Book(
-      isbn: 9780735280311,
+      isbn: '9780735280311',
       title: 'CATCH-22',
       publisher: 'Simon & Schuster',
       author: 'Joseph Heller',
